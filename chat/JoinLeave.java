@@ -12,6 +12,7 @@ import org.bukkit.scoreboard.Score;
 import org.bukkit.scoreboard.Scoreboard;
 import org.bukkit.scoreboard.ScoreboardManager;
 
+import blume_system.config.CheckBanned;
 import blume_system.config.Currency;
 import blume_system.config.NewJoin;
 import blume_system.config.PlayerScoreboard;
@@ -46,6 +47,8 @@ public class JoinLeave implements Listener {
 		Tablist.setTablist(e.getPlayer()); //set tablist
 		
 		PlayerScoreboard.create(e.getPlayer()); //create scoreboard
+		
+		CheckBanned.check(e.getPlayer()); //check if the player is banned (didnt work)
 	}
 	
 	@EventHandler

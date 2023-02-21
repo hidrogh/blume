@@ -17,7 +17,7 @@ public class CommandDeops implements CommandExecutor {
             
             if (p.isOp()) {
             	p.setOp(false);
-            	DisconnectMessages.kickOnOp();
+            	DisconnectMessages.kickOnOp(p);
             } else {
             	ChatMessages.notFound(p);
             }

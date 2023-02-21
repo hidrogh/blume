@@ -53,7 +53,7 @@ public class Mining implements Listener {
     			
     			for (int i = 0; i < blockWhitelist.length; i++) { //did the player broke a allowed block?
     				if (blockType.equals(blockWhitelist[i])) {
-    					System.out.print(Log.logEvent() + "mining -> mining [player:" + e.getPlayer().getName() + " farmed block:" + e.getBlock().getType() + "]");
+    					//System.out.print(Log.logEvent() + "mining -> mining [player:" + e.getPlayer().getName() + " farmed block:" + e.getBlock().getType() + "]");
     					
 	            		Switches.setStopWPBlockBreak(true); //stop the "WorldProtection" class in this case
 	            		

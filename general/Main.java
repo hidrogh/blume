@@ -3,6 +3,9 @@ package blume_system.general;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import blume_system.butcher.AnimalEvent;
+import blume_system.butcher.AnimalKillOnStart;
+import blume_system.butcher.AnimalReward;
 import blume_system.butcher.AnimalZoneSort;
 import blume_system.chat.CommandCreator;
 import blume_system.chat.JoinLeave;
@@ -33,6 +36,8 @@ public class Main extends JavaPlugin {
     	setListeners(); //set listeners
     	setGamerules(); //set gamerules
     	setCommands(); //set commands
+    	
+    	AnimalKillOnStart.killAnimals(); //kill all animals on reload or start
     }
     
     public void onDisable() {
@@ -59,6 +64,7 @@ public class Main extends JavaPlugin {
     	System.out.print(Log.logInfo() + "world gamerules set");
     	
     	getPluginInstance().getServer().getWorld(Config.getWorldName()).setGameRuleValue("keepInventory", "true");
+    	getPluginInstance().getServer().getWorld(Config.getWorldName()).setGameRuleValue("doMobLoot", "false");
     }
     
     public void setCommands() {
@@ -74,6 +80,8 @@ public class Main extends JavaPlugin {
     	getServer().getPluginManager().registerEvents(new WorldProtection(), this);
     	getServer().getPluginManager().registerEvents(new JoinLeave(), this);
     	getServer().getPluginManager().registerEvents(new PlayerWrite(), this);
+    	getServer().getPluginManager().registerEvents(new AnimalEvent(), this);
+    	getServer().getPluginManager().registerEvents(new AnimalReward(), this);
     }
     
     public void setClasses() {

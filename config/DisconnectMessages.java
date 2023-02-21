@@ -22,15 +22,14 @@ public class DisconnectMessages {
             }
         }
     }
-    public static void kickOnOp() { //if player goes from op to deop or deop to op
-        for (Player p : Bukkit.getServer().getOnlinePlayers()) {
-        	p.kickPlayer(getInfoPart(p, true) + "You were kicked due to a permission change.\nPlease rejoin.");
-        }
+    public static void kickOnOp(Player p) { //if player goes from op to deop or deop to op
+        p.kickPlayer(getInfoPart(p, true) + "You were kicked due to a permission change.\nPlease rejoin.");
     }
-    public static void kickForError() { //do not use - for special purpose
-        for (Player p : Bukkit.getServer().getOnlinePlayers()) {
-        	p.kickPlayer(getInfoPart(p, true) + "You were kicked due to a system error.\nYour money and level stats got reset.");
-        }
+    public static void kickForError(Player p) { //do not use - for special purpose
+        p.kickPlayer(getInfoPart(p, true) + "You were kicked due to a system error.\nYour money and level stats got reset.");
+    }
+    public static void banned(Player p) {
+        p.kickPlayer(getInfoPart(p, false) + "You were banned.");
     }
     
     

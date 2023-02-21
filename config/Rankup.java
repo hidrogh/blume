@@ -6,6 +6,7 @@ import org.bukkit.Sound;
 import org.bukkit.craftbukkit.v1_8_R1.entity.CraftPlayer;
 import org.bukkit.entity.Player;
 import blume_system.chat.ChatTags;
+import blume_system.general.Log;
 import blume_system.general.Main;
 import blume_system.settings.Config;
 import net.md_5.bungee.api.ChatColor;
@@ -24,8 +25,7 @@ public class Rankup {
 	public Rankup(Player p) {
 		String currentStatus = Main.getPluginInstance().getConfig().getString("players.uuid-" + p.getUniqueId().toString() + ".status");
 		
-		if (RankupContainer.getCurrentStatus().equals(currentStatus) ||
-			currentStatus == Config.rank1) {
+		if (RankupContainer.getCurrentStatus().equals(currentStatus) || currentStatus == Config.rank1) {
 			
 			//*** no rankup ***
 		} else { //rankup happend
@@ -80,5 +80,7 @@ public class Rankup {
 			0, //speed
 			150, //particleCount (particles that spawn inside the zone)
 			10); //radius
+		
+		System.out.print(Log.logEvent() + p.getName() + " ranked up to " + currentStatus);
 	}
 }

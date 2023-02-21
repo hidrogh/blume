@@ -40,6 +40,7 @@ public class Updater {
 				/*
 				 * - if no players are online anymore
 				 * - the "Update" class will stop if no players are online
+				 * - if player dies and just waits on the death-screen it also counts as no players online
 				 */
 				if (Main.getPluginInstance().getServer().getOnlinePlayers().size() == 0) {
 					if (oneTimeMessage == false) { //that this message gets send only one time
@@ -61,7 +62,6 @@ public class Updater {
 	
 	private void delayA() {
 		//---[ every 1sec ]---
-		
 		new MineOreSpawn(); //mine world generator
 		new AnimalSpawningZones(); //animal spawning zones
 	}

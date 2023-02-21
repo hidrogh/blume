@@ -17,10 +17,16 @@ public class Level {
 		String oldLevel = Main.getPluginInstance().getConfig().getString("players.uuid-" + p.getUniqueId().toString() + ".level_miner");
 		Main.getPluginInstance().getConfig().set("players.uuid-" + p.getUniqueId().toString() + ".level_miner", Integer.parseInt(oldLevel) + amount);
 		
-		System.out.print(Log.logEvent() + "miner_level added" + "[player: " + p.getName() + " got " + oldLevel + " and now " + (Integer.parseInt(oldLevel) + amount));
-	
 		globalLevel(p); //set global level
 		Main.getPluginInstance().saveConfig(); //save config file
+	}
+	
+	public static void addLevelButcher(int amount, Player p) {
+		String oldLevel = Main.getPluginInstance().getConfig().getString("players.uuid-" + p.getUniqueId().toString() + ".level_butcher");
+		Main.getPluginInstance().getConfig().set("players.uuid-" + p.getUniqueId().toString() + ".level_butcher", Integer.parseInt(oldLevel) + amount);
+
+		globalLevel(p);
+		Main.getPluginInstance().saveConfig();
 	}
 	
 	public static void globalLevel(Player p) { //add all levels together
@@ -35,7 +41,7 @@ public class Level {
 			System.out.print(Log.logError() + p.getName() + " [" + p.getUniqueId() + "] got a negative amount of level");
 			sum = 0;
 			
-			DisconnectMessages.kickForError();
+			DisconnectMessages.kickForError(p);
 		}
 		if (sum >= Config.maxLevelAmount) { //if player goes higher than java integer value (max amount of money) every values will get reset to prevent errors
 			sum = 0;
@@ -48,7 +54,7 @@ public class Level {
 			
 			Warning.giveWarning(p);
 			
-			DisconnectMessages.kickForError();
+			DisconnectMessages.kickForError(p);
 		}
 		
 		Main.getPluginInstance().getConfig().set("players.uuid-" + p.getUniqueId().toString() + ".level_global", Integer.toString(sum));
@@ -58,6 +64,8 @@ public class Level {
 		Tablist.setTablist(p); //refresh tablist
 		PlayerScoreboard.refresh(p); //refresh scoreboard
 		
-		new Rankup(p); //rankup messages if possible (global rank)
+		if (!p.isOp()) { //op will never rank up (to prevent errors)
+			new Rankup(p); //rankup messages if possible (global rank)
+		}
 	}
 }

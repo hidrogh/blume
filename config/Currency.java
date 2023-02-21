@@ -21,13 +21,13 @@ public class Currency {
 			
 			Warning.giveWarning(p);
 			
-			DisconnectMessages.kickForError();
+			DisconnectMessages.kickForError(p);
 		}
 		if (sum < 0) { //negative amount of money trough a bug
 			System.out.print(Log.logError() + p.getName() + " [" + p.getUniqueId() + "] got a negative amount of money");
 			sum = 0;
 			
-			DisconnectMessages.kickForError();
+			DisconnectMessages.kickForError(p);
 		}
 		
 		Main.getPluginInstance().getConfig().set("players.uuid-" + p.getUniqueId().toString() + ".currency", Integer.toString(sum));

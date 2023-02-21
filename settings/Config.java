@@ -2,6 +2,7 @@ package blume_system.settings;
 
 import org.bukkit.Material;
 import org.bukkit.command.CommandExecutor;
+import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 
 import blume_system.chat.operatorcommands.CommandDeops;
@@ -21,6 +22,22 @@ public class Config {
 	
 	/*
 	 * SETTINGS
+	 * 
+	 * - Start items
+	 * - Help page
+	 * - Do not give a sword, give a stick... (make that ores can only be destoryed with a wooden pickaxe and animals can only be hit with a wooden stick, if not cancle event)
+	 *	give xp if kill
+	 *	make banner animation 
+	 *	sie sollen immer oben spawenn auch bei hölen
+	 *	sie sollen nicht in blöcken steckenbleiben
+	 *	disable kill message
+	 *	get location if red line they will die
+	 *	stop animal xp drop
+	 *  out of zone kill
+	 *  blood effects on animals 
+	 *  sound and banner
+	 *  when animals spawn particle effect
+	 *  - ERROR : if you rejoin and leave and rejoin... animals will double because animals container is not permanenent. config file is needed
 	 */
 	
 	
@@ -181,33 +198,6 @@ public class Config {
 	
 	
 	/*
-	 * animal spawning zones
-	 * 
-	 * - one row equals one zone
-	 * - enter from: x,y,z   and   to: x,y,z (sorting is not needed)
-	 * - you can add infinite rows (zones)
-	 * - name each zone at the end
-	 */
-	public static int[] getAnimalSpawningZones() {
-		int[] animalZones = {
-				7,56,2,				13,50,-3, //animal spawning zone 1
-				0,0,0,				0,0,0, //animal spawning zone 2
-				0,0,0,				0,0,0 //animal spawning zone 3
-		};
-    	return animalZones;
-    }
-	//animal spawn position (should equal location amount)
-	public static int[] getAnimalSpawningPosition() {
-		int[] animalPosition = {
-				7,56,2,				13,50,-3, //location for spawning zone 1
-				0,0,0,				0,0,0, //location for spawning zone 2
-				0,0,0,				0,0,0  //location for spawning zone 3
-		};
-    	return animalPosition;
-    }
-	
-	
-	/*
 	 * scoreboard format
 	 */
 	public static String sbRank = "Rank: ";
@@ -222,6 +212,66 @@ public class Config {
 	 */
 	public static int maxMoneyAmount = 1000000000;
 	public static int maxLevelAmount = 1000000000;
+	
+	
+	/*
+	 * animal spawning zones
+	 * 
+	 * - one row equals one zone
+	 * - enter from: x,y,z   and   to: x,y,z (sorting is not needed)
+	 * - multiple zones can be stacked over each other
+	 * - spawn location should not have holes under the area, animals will spawn there (use a solid floor)
+	 */
+	public static int[] getAnimalSpawningZones() {
+		int[] animalZones = {
+				16,50,15,			6,50,4, 	//chicken spawn zone
+				16,50,15,			6,50,4,		//pig spawn zone
+				16,50,15,			6,50,4,		//sheep spawn zone
+				16,50,15,			6,50,4,		//cow spawn zone
+		};
+    	return animalZones;
+    }
+	
+	
+	/*
+	 * add animal 0.5 move
+	 * 
+	 * - if the animals will spawn inside blocks or not perfectly in the middle of blocks, turn this option on
+	 * - If the animal spawns in mid of 4 blocks
+	 * - this will add a 0.5 coordinate extra
+	 */
+	public static boolean animalMove = true;
+	
+	
+	/*
+	 * animal settings
+	 * 
+	 * - if animal count is high up, spawnprocess will go slowly due to max spawnrate of 4 animals per second
+	 */
+	public static EntityType aTypeChicken = EntityType.CHICKEN;
+	public static String aNameChicken = ChatColor.GRAY + "§lLevel 1";
+	public static int aMaxAmountChicken = 1;
+	public static int aRewardChicken = 1;
+	public static String aChickenBanner = ChatColor.GRAY + "+1 " + ChatColor.WHITE + "lvl";
+	
+	public static EntityType aTypePig = EntityType.PIG;
+	public static String aNamePig = ChatColor.GOLD + "§lLevel 2";
+	public static int aMaxAmountPig = 1;
+	public static int aRewardPig = 2;
+	public static String aPigBanner = ChatColor.GOLD + "+2 " + ChatColor.WHITE + "lvl";
+	
+	public static EntityType aTypeSheep = EntityType.SHEEP;
+	public static String aNameSheep = ChatColor.AQUA + "§lLevel 3";
+	public static int aMaxAmountSheep = 1;
+	public static int aRewardSheep = 4;
+	public static String aSheepBanner = ChatColor.AQUA + "+4 " + ChatColor.WHITE + "lvl";
+	
+	public static EntityType aTypeCow = EntityType.COW;
+	public static String aNameCow = ChatColor.GREEN + "§lLevel 4";
+	public static int aMaxAmountCow = 1;
+	public static int aRewardCow = 8;
+	public static String aCowBanner = ChatColor.GREEN + "+8 " + ChatColor.WHITE + "lvl";
+	
 	
 	
 	
@@ -239,6 +289,7 @@ public class Config {
 //-----------------------------------------------------------------------------
 //					OVERFLOW
 //-----------------------------------------------------------------------------
+	
 	public static void miningReward(Player p) {
 		if (Mining.getBlockMaterial() == Material.COAL_ORE) {
 			RewardMessage.setMessage(bannerCoal, p); //send message to player

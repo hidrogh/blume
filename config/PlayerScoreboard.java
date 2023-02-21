@@ -76,11 +76,13 @@ public class PlayerScoreboard {
 		Score level = o.getScore(scoreLevel);
 		level.setScore(2);
 		
-		Score clear2 = o.getScore("");
-		clear2.setScore(1);
-		
-		Score nextLevel = o.getScore(scoreNextLevel);
-		nextLevel.setScore(0);
+		if (!p.isOp()) { //op does not need next level
+			Score clear2 = o.getScore("");
+			clear2.setScore(1);
+			
+			Score nextLevel = o.getScore(scoreNextLevel);
+			nextLevel.setScore(0);
+		}
 		
 		//save old scores to reset on next run
 		oldScoreRank = scoreRank;
