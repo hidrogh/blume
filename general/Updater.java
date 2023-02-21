@@ -2,7 +2,8 @@ package blume_system.general;
 
 import org.bukkit.scheduler.BukkitRunnable;
 
-import blume_system.worldevent.Mine;
+import blume_system.butcher.AnimalSpawningZones;
+import blume_system.mining.MineOreSpawn;
 
 public class Updater {
 	
@@ -61,7 +62,8 @@ public class Updater {
 	private void delayA() {
 		//---[ every 1sec ]---
 		
-		new Mine(); //mine world generator
+		new MineOreSpawn(); //mine world generator
+		new AnimalSpawningZones(); //animal spawning zones
 	}
 	
 	private void delayB() {

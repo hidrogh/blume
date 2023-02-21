@@ -23,8 +23,6 @@ public class Level {
 		Main.getPluginInstance().saveConfig(); //save config file
 	}
 	
-	
-	
 	public static void globalLevel(Player p) { //add all levels together
 		String minerLevel = Main.getPluginInstance().getConfig().getString("players.uuid-" + p.getUniqueId().toString() + ".level_miner");
 		String farmerLevel = Main.getPluginInstance().getConfig().getString("players.uuid-" + p.getUniqueId().toString() + ".level_farmer");
@@ -34,6 +32,9 @@ public class Level {
 		Main.getPluginInstance().getConfig().set("players.uuid-" + p.getUniqueId().toString() + ".level_global", Integer.parseInt(minerLevel) + Integer.parseInt(farmerLevel) + Integer.parseInt(butcherLevel) + Integer.parseInt(warriorLevel));
 		
 		Config.refreshGlobalRank(p); //refresh rank inside config file
+		
+		Tablist.setTablist(p); //refresh tablist
+		PlayerScoreboard.refresh(p); //refresh scoreboard
 		
 		new Rankup(p); //rankup messages if possible (global rank)
 	}

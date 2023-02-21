@@ -2,6 +2,7 @@ package blume_system.mining;
 
 import org.bukkit.Location;
 
+import blume_system.general.Log;
 import blume_system.settings.Config;
 
 public class MiningZoneSort {
@@ -9,6 +10,11 @@ public class MiningZoneSort {
 	/*
 	 * mining sort algorithm
 	 */
+	
+	public MiningZoneSort() {
+		MiningContainer.setMiningZones(getMiningZonesSorted());
+	}
+	
 	public static Location[] getMiningZonesSorted() {
 		//importing all the zones from the "Config" class
 		int readCounter = 0;
@@ -50,7 +56,9 @@ public class MiningZoneSort {
 			}
 			lwSortCounter += 2;
 		}
-				
+		
+		System.out.print(Log.logInfo() + "mining zones got sorted (total: " + miningZones.length/6 + ")");
+		
 		return locationWhitelist;
 	}
 }

@@ -38,7 +38,7 @@ public class Rankup {
 	public static void rankupSequenz(Player p) {
 		String currentStatus = Main.getPluginInstance().getConfig().getString("players.uuid-" + p.getUniqueId().toString() + ".status");
 		
-		p.sendMessage(ChatTags.logBlume() + "Congratulations, you ranked up from " + currentStatus + " to " + Config.getGlobalRank(p).substring(0, 1).toLowerCase() + Config.getGlobalRank(p).substring(1) + ChatColor.GRAY + ".");
+		p.sendMessage(ChatTags.logBlume() + "Congratulations, you ranked up to " + Config.getGlobalRank(p).substring(0, 1).toLowerCase() + Config.getGlobalRank(p).substring(1) + ChatColor.GRAY + ".");
 		
 		IChatBaseComponent chatTitle = ChatSerializer.a("{\"text\": \"" + ChatColor.GRAY + "RANK UP" + "\"}");
 		IChatBaseComponent chatSubtitle = ChatSerializer.a("{\"text\": \"" +  ChatColor.GRAY + "New rank: " + Config.getGlobalRank(p) + "\"}");

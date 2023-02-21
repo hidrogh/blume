@@ -17,12 +17,15 @@ public class Currency {
 		System.out.print(Log.logEvent() + "currency added" + "[player: " + p.getName() + " got " + oldCurrency + " and now " + (Integer.parseInt(oldCurrency) + amount));
 	
 		Main.getPluginInstance().saveConfig(); //save config file
+		
+		PlayerScoreboard.refresh(p); //refresh scoreboard
 	}
 	
 	public static void syncXP(Player p) {
 		String currencyAmount = Main.getPluginInstance().getConfig().getString("players.uuid-" + p.getUniqueId().toString() + ".currency");
 		
 		p.setExp(0);
-		p.setLevel(Integer.parseInt(currencyAmount));
+		//p.setLevel(Integer.parseInt(currencyAmount)); //not in use
+		p.setLevel(0);
 	}
 }

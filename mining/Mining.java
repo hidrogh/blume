@@ -44,10 +44,10 @@ public class Mining implements Listener {
 		//get values from "MiningZoneSort.getMiningZonesSorted()"
 		int lw_counter = 0;
 		
-    	for (int i2 = 0; i2 < MiningZoneSort.getMiningZonesSorted().length/2; i2++) { //go trough all available zones
-    		if (blockLoc.getBlockX() >= MiningZoneSort.getMiningZonesSorted()[lw_counter].getBlockX() && blockLoc.getBlockX() <= MiningZoneSort.getMiningZonesSorted()[lw_counter+1].getBlockX() &&
-    			blockLoc.getBlockY() >= MiningZoneSort.getMiningZonesSorted()[lw_counter].getBlockY() && blockLoc.getBlockY() <= MiningZoneSort.getMiningZonesSorted()[lw_counter+1].getBlockY() &&
-    			blockLoc.getBlockZ() >= MiningZoneSort.getMiningZonesSorted()[lw_counter].getBlockZ() && blockLoc.getBlockZ() <= MiningZoneSort.getMiningZonesSorted()[lw_counter+1].getBlockZ() &&
+    	for (int i2 = 0; i2 < MiningContainer.getMiningZonesSorted().length/2; i2++) { //go trough all available zones
+    		if (blockLoc.getBlockX() >= MiningContainer.getMiningZonesSorted()[lw_counter].getBlockX() && blockLoc.getBlockX() <= MiningContainer.getMiningZonesSorted()[lw_counter+1].getBlockX() &&
+    			blockLoc.getBlockY() >= MiningContainer.getMiningZonesSorted()[lw_counter].getBlockY() && blockLoc.getBlockY() <= MiningContainer.getMiningZonesSorted()[lw_counter+1].getBlockY() &&
+    			blockLoc.getBlockZ() >= MiningContainer.getMiningZonesSorted()[lw_counter].getBlockZ() && blockLoc.getBlockZ() <= MiningContainer.getMiningZonesSorted()[lw_counter+1].getBlockZ() &&
     			!e.getPlayer().isOp()) { //checking if block location is between "from" and "to"
     			
     			

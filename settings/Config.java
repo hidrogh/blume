@@ -1,8 +1,14 @@
 package blume_system.settings;
 
 import org.bukkit.Material;
+import org.bukkit.command.CommandExecutor;
 import org.bukkit.entity.Player;
 
+import blume_system.chat.operatorcommands.CommandMakemepro;
+import blume_system.chat.operatorcommands.CommandRankuptest;
+import blume_system.chat.operatorcommands.CommandResetbody;
+import blume_system.chat.usercommands.CommandRanks;
+import blume_system.chat.usercommands.CommandStats;
 import blume_system.config.Level;
 import blume_system.general.Main;
 import blume_system.mining.Mining;
@@ -42,6 +48,35 @@ public class Config {
 		
 		Main.getPluginInstance().getConfig().set(uuid + ".status", ""); //rank, banned, warned
 	}
+	
+	
+	/*
+	 * command creation
+	 * 
+	 * - add in this class: command, class, description
+	 * - create class and edit command
+	 * - add command to "plugin.yml"
+	 */
+	public static String userCommands[] = {					"ranks",
+															"stats",
+															"makemepro",
+															"rankuptest",
+															"resetbody"
+	};
+
+	public static CommandExecutor userCommandClasses[] = {	new CommandRanks(),
+		  													new CommandStats(),
+		  													new CommandMakemepro(),
+		  													new CommandRankuptest(),
+		  													new CommandResetbody()
+	};
+
+	public static String userCommandDesk[] = {				"List all user ranks",
+															"Your stats",
+															"Maxes all stats",
+															"Test rankup sequenz",
+															"Rest all stats"
+	};
 	
 	
 	/*
@@ -93,6 +128,16 @@ public class Config {
 	
 	
 	/*
+	 * ore banner message
+	 */
+	public static String bannerCoal = ChatColor.DARK_GRAY + "+" + Integer.toString(reward_coal) + ChatColor.WHITE + " lvl";
+	public static String bannerIron = ChatColor.GRAY + "+" + Integer.toString(reward_iron) + ChatColor.WHITE + " lvl";
+	public static String bannerGold = ChatColor.GOLD + "+" + Integer.toString(reward_gold) + ChatColor.WHITE + " lvl";
+	public static String bannerDiamond = ChatColor.AQUA + "+" + Integer.toString(reward_diamond) + ChatColor.WHITE + " lvl";
+	public static String bannerEmerald = ChatColor.GREEN + "+" + Integer.toString(reward_emerald) + ChatColor.WHITE + " lvl";
+	
+	
+	/*
 	 * ranks for global xp
 	 * 
 	 *  - only use small letters
@@ -116,7 +161,43 @@ public class Config {
 	
 	public static String rank7 = "king";
 	public static int r7_points = 50000;
-
+	
+	
+	/*
+	 * animal spawning zones
+	 * 
+	 * - one row equals one zone
+	 * - enter from: x,y,z   and   to: x,y,z (sorting is not needed)
+	 * - you can add infinite rows (zones)
+	 * - name each zone at the end
+	 */
+	public static int[] getAnimalSpawningZones() {
+		int[] animalZones = {
+				7,56,2,				13,50,-3, //animal spawning zone 1
+				0,0,0,				0,0,0, //animal spawning zone 2
+				0,0,0,				0,0,0 //animal spawning zone 3
+		};
+    	return animalZones;
+    }
+	//animal spawn position (should equal location amount)
+	public static int[] getAnimalSpawningPosition() {
+		int[] animalPosition = {
+				7,56,2,				13,50,-3, //location for spawning zone 1
+				0,0,0,				0,0,0, //location for spawning zone 2
+				0,0,0,				0,0,0  //location for spawning zone 3
+		};
+    	return animalPosition;
+    }
+	
+	
+	/*
+	 * scoreboard format
+	 */
+	public static String sbRank = "Rank: ";
+	public static String sbMoney = ChatColor.WHITE + "Money: " + ChatColor.YELLOW;
+	public static String sbLevel = ChatColor.WHITE + "Level: " + ChatColor.YELLOW;
+	public static String sbNextLevel = ChatColor.WHITE + "Next lvl in: ";
+	
 	
 	
 	
@@ -136,19 +217,19 @@ public class Config {
 //-----------------------------------------------------------------------------
 	public static void miningReward(Player p) {
 		if (Mining.getBlockMaterial() == Material.COAL_ORE) {
-			RewardMessage.setMessage(ChatColor.DARK_GRAY + "+" + Integer.toString(reward_coal) + ChatColor.WHITE + " Miner Level", p); //send message to player
+			RewardMessage.setMessage(bannerCoal, p); //send message to player
 			Level.addLevelMiner(reward_coal, p);
 		} else if (Mining.getBlockMaterial() == Material.IRON_ORE) {
-			RewardMessage.setMessage(ChatColor.GRAY + "+" + Integer.toString(reward_iron) + ChatColor.WHITE + " Miner Level", p);
+			RewardMessage.setMessage(bannerIron, p);
 			Level.addLevelMiner(reward_iron, p);
 		} else if (Mining.getBlockMaterial() == Material.GOLD_ORE) {
-			RewardMessage.setMessage(ChatColor.GOLD + "+" + Integer.toString(reward_gold) + ChatColor.WHITE + " Miner Level", p);
+			RewardMessage.setMessage(bannerGold, p);
 			Level.addLevelMiner(reward_gold, p);
 		} else if (Mining.getBlockMaterial() == Material.DIAMOND_ORE) {
-			RewardMessage.setMessage(ChatColor.AQUA + "+" + Integer.toString(reward_diamond) + ChatColor.WHITE + " Miner Level", p);
+			RewardMessage.setMessage(bannerDiamond, p);
 			Level.addLevelMiner(reward_diamond, p);
 		} else if (Mining.getBlockMaterial() == Material.EMERALD_ORE) {
-			RewardMessage.setMessage(ChatColor.GREEN + "+" + Integer.toString(reward_emerald) + ChatColor.WHITE + " Miner Level", p);
+			RewardMessage.setMessage(bannerEmerald, p);
 			Level.addLevelMiner(reward_emerald, p);
 		}
 	}
@@ -179,7 +260,7 @@ public class Config {
 		if (p.isOp()) {
 			rank = ChatColor.RED  + "Operator";
 		} else if (r7_points < Integer.parseInt(Main.getPluginInstance().getConfig().getString("players.uuid-" + p.getUniqueId().toString() + ".level_global"))) {
-			rank = ChatColor.YELLOW + rank7.substring(0, 1).toUpperCase() + rank7.substring(1);
+			rank = ChatColor.LIGHT_PURPLE + rank7.substring(0, 1).toUpperCase() + rank7.substring(1);
 		} else if (r6_points <= Integer.parseInt(Main.getPluginInstance().getConfig().getString("players.uuid-" + p.getUniqueId().toString() + ".level_global"))) {
 			rank = ChatColor.GREEN + rank6.substring(0, 1).toUpperCase() + rank6.substring(1);
 		} else if (r5_points <= Integer.parseInt(Main.getPluginInstance().getConfig().getString("players.uuid-" + p.getUniqueId().toString() + ".level_global"))) {
