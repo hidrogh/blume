@@ -3,6 +3,7 @@ package blume_system.config;
 import org.bukkit.entity.Player;
 import blume_system.general.Log;
 import blume_system.general.Main;
+import blume_system.settings.Config;
 
 public class Currency {
 	
@@ -12,7 +13,24 @@ public class Currency {
 	
 	public static void addCurrency(int amount, Player p) { //amount and playername
 		String oldCurrency = Main.getPluginInstance().getConfig().getString("players.uuid-" + p.getUniqueId().toString() + ".currency");
-		Main.getPluginInstance().getConfig().set("players.uuid-" + p.getUniqueId().toString() + ".currency", Integer.parseInt(oldCurrency) + amount);
+		
+		int sum = Integer.parseInt(oldCurrency) + amount;
+		
+		if (sum > Config.maxMoneyAmount) { //if amount of money goes over max amount inside the config
+			sum = 0;
+			
+			Warning.giveWarning(p);
+			
+			DisconnectMessages.kickForError();
+		}
+		if (sum < 0) { //negative amount of money trough a bug
+			System.out.print(Log.logError() + p.getName() + " [" + p.getUniqueId() + "] got a negative amount of money");
+			sum = 0;
+			
+			DisconnectMessages.kickForError();
+		}
+		
+		Main.getPluginInstance().getConfig().set("players.uuid-" + p.getUniqueId().toString() + ".currency", Integer.toString(sum));
 		
 		System.out.print(Log.logEvent() + "currency added" + "[player: " + p.getName() + " got " + oldCurrency + " and now " + (Integer.parseInt(oldCurrency) + amount));
 	

@@ -41,7 +41,13 @@ public class PlayerScoreboard {
 		String scoreRank = Config.sbRank + playerRank;
 		String scoreMoney = Config.sbMoney + currency + "$";
 		String scoreLevel = Config.sbLevel + level_global;
-		String scoreNextLevel = Config.sbNextLevel + Integer.toString(UntilNextLvl.getUntilNextLvl(p));
+		String scoreNextLevel;
+		if (UntilNextLvl.getUntilNextLvl(p) == 987654321) { //if player got max level
+			scoreNextLevel = Config.sbNextMaxLevel;
+		} else {
+			scoreNextLevel = Config.sbNextLevel + Integer.toString(UntilNextLvl.getUntilNextLvl(p));
+		}
+		
 		
 		//reset and delete old scores
 		if (oldScoreRank != scoreRank && oldScoreRank != "") {

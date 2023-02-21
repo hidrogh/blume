@@ -7,6 +7,8 @@ import org.bukkit.entity.Player;
 
 import blume_system.chat.ChatMessages;
 import blume_system.chat.ChatTags;
+import blume_system.config.Level;
+import blume_system.config.PlayerScoreboard;
 import blume_system.general.Main;
 
 public class CommandMakemepro implements CommandExecutor {
@@ -22,7 +24,9 @@ public class CommandMakemepro implements CommandExecutor {
             	Main.getPluginInstance().getConfig().set("players.uuid-" + p.getUniqueId().toString() + ".level_farmer", "100000");
             	Main.getPluginInstance().getConfig().set("players.uuid-" + p.getUniqueId().toString() + ".level_butcher", "100000");
             	Main.getPluginInstance().getConfig().set("players.uuid-" + p.getUniqueId().toString() + ".level_warrior", "100000");
-            	Main.getPluginInstance().getConfig().set("players.uuid-" + p.getUniqueId().toString() + ".currency", "100000000");
+            	Main.getPluginInstance().getConfig().set("players.uuid-" + p.getUniqueId().toString() + ".currency", "1000000");
+            	
+            	Level.globalLevel(p); //refresh stats
             	
             	p.sendMessage(ChatTags.logSystem() + "All stats now maxed.");
             } else {

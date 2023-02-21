@@ -4,7 +4,9 @@ import org.bukkit.Material;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.entity.Player;
 
+import blume_system.chat.operatorcommands.CommandDeops;
 import blume_system.chat.operatorcommands.CommandMakemepro;
+import blume_system.chat.operatorcommands.CommandOps;
 import blume_system.chat.operatorcommands.CommandRankuptest;
 import blume_system.chat.operatorcommands.CommandResetbody;
 import blume_system.chat.usercommands.CommandRanks;
@@ -46,7 +48,9 @@ public class Config {
 		
 		Main.getPluginInstance().getConfig().set(uuid + ".currency", 0); //currency amount (xp bar)
 		
-		Main.getPluginInstance().getConfig().set(uuid + ".status", ""); //rank, banned, warned
+		Main.getPluginInstance().getConfig().set(uuid + ".status", ""); //ranks
+		
+		Main.getPluginInstance().getConfig().set(uuid + ".warned", 0); //amount of system warning
 	}
 	
 	
@@ -61,21 +65,27 @@ public class Config {
 															"stats",
 															"makemepro",
 															"rankuptest",
-															"resetbody"
+															"resetbody",
+															"ops",
+															"deops"
 	};
 
 	public static CommandExecutor userCommandClasses[] = {	new CommandRanks(),
 		  													new CommandStats(),
 		  													new CommandMakemepro(),
 		  													new CommandRankuptest(),
-		  													new CommandResetbody()
+		  													new CommandResetbody(),
+		  													new CommandOps(),
+		  													new CommandDeops()
 	};
 
 	public static String userCommandDesk[] = {				"List all user ranks",
 															"Your stats",
 															"Maxes all stats",
 															"Test rankup sequenz",
-															"Rest all stats"
+															"Rest all stats",
+															"Makes you op",
+															"Makes you deop"
 	};
 	
 	
@@ -143,24 +153,31 @@ public class Config {
 	 *  - only use small letters
 	 */
 	public static String rank1 = "newbie"; //0 points at start
+	public static ChatColor r1c = ChatColor.GRAY; //color of rank
 	
-	public static String rank2 = "villager";
+	public static String rank2 = "explorer";
 	public static int r2_points = 25; //how many points are needed
+	public static ChatColor r2c = ChatColor.GRAY;
 	
-	public static String rank3 = "worker";
+	public static String rank3 = "specialist";
 	public static int r3_points = 200;
+	public static ChatColor r3c = ChatColor.BLUE;
 	
 	public static String rank4 = "professional";
 	public static int r4_points = 1000;
+	public static ChatColor r4c = ChatColor.BLUE;
 	
 	public static String rank5 = "master";
 	public static int r5_points = 5000;
+	public static ChatColor r5c = ChatColor.GREEN;
 	
-	public static String rank6 = "lord";
+	public static String rank6 = "champion";
 	public static int r6_points = 15000;
+	public static ChatColor r6c = ChatColor.GREEN;
 	
-	public static String rank7 = "king";
+	public static String rank7 = "emperor";
 	public static int r7_points = 50000;
+	public static ChatColor r7c = ChatColor.LIGHT_PURPLE;
 	
 	
 	/*
@@ -197,7 +214,14 @@ public class Config {
 	public static String sbMoney = ChatColor.WHITE + "Money: " + ChatColor.YELLOW;
 	public static String sbLevel = ChatColor.WHITE + "Level: " + ChatColor.YELLOW;
 	public static String sbNextLevel = ChatColor.WHITE + "Next lvl in: ";
+	public static String sbNextMaxLevel = ChatColor.RED + "§lMAX LVL REACHED"; //next lvl message on max lvl
 	
+	
+	/*
+	 * max number of Level and Money
+	 */
+	public static int maxMoneyAmount = 1000000000;
+	public static int maxLevelAmount = 1000000000;
 	
 	
 	
@@ -260,19 +284,19 @@ public class Config {
 		if (p.isOp()) {
 			rank = ChatColor.RED  + "Operator";
 		} else if (r7_points < Integer.parseInt(Main.getPluginInstance().getConfig().getString("players.uuid-" + p.getUniqueId().toString() + ".level_global"))) {
-			rank = ChatColor.LIGHT_PURPLE + rank7.substring(0, 1).toUpperCase() + rank7.substring(1);
+			rank = r7c + rank7.substring(0, 1).toUpperCase() + rank7.substring(1);
 		} else if (r6_points <= Integer.parseInt(Main.getPluginInstance().getConfig().getString("players.uuid-" + p.getUniqueId().toString() + ".level_global"))) {
-			rank = ChatColor.GREEN + rank6.substring(0, 1).toUpperCase() + rank6.substring(1);
+			rank = r6c + rank6.substring(0, 1).toUpperCase() + rank6.substring(1);
 		} else if (r5_points <= Integer.parseInt(Main.getPluginInstance().getConfig().getString("players.uuid-" + p.getUniqueId().toString() + ".level_global"))) {
-			rank = ChatColor.GREEN + rank5.substring(0, 1).toUpperCase() + rank5.substring(1);
+			rank = r5c + rank5.substring(0, 1).toUpperCase() + rank5.substring(1);
 		} else if (r4_points <= Integer.parseInt(Main.getPluginInstance().getConfig().getString("players.uuid-" + p.getUniqueId().toString() + ".level_global"))) {
-			rank = ChatColor.BLUE + rank4.substring(0, 1).toUpperCase() + rank4.substring(1);
+			rank = r4c + rank4.substring(0, 1).toUpperCase() + rank4.substring(1);
 		} else if (r3_points <= Integer.parseInt(Main.getPluginInstance().getConfig().getString("players.uuid-" + p.getUniqueId().toString() + ".level_global"))) {
-			rank = ChatColor.BLUE + rank3.substring(0, 1).toUpperCase() + rank3.substring(1);
+			rank = r3c + rank3.substring(0, 1).toUpperCase() + rank3.substring(1);
 		} else if (r2_points <= Integer.parseInt(Main.getPluginInstance().getConfig().getString("players.uuid-" + p.getUniqueId().toString() + ".level_global"))) {
-			rank = ChatColor.GRAY + rank2.substring(0, 1).toUpperCase() + rank2.substring(1);
+			rank = r2c + rank2.substring(0, 1).toUpperCase() + rank2.substring(1);
 		} else if (r2_points > Integer.parseInt(Main.getPluginInstance().getConfig().getString("players.uuid-" + p.getUniqueId().toString() + ".level_global"))) {
-			rank = ChatColor.GRAY + rank1.substring(0, 1).toUpperCase() + rank1.substring(1);
+			rank = r1c + rank1.substring(0, 1).toUpperCase() + rank1.substring(1);
 		}
 		
 		return rank;

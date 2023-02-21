@@ -7,6 +7,8 @@ import org.bukkit.entity.Player;
 
 import blume_system.chat.ChatMessages;
 import blume_system.chat.ChatTags;
+import blume_system.config.Level;
+import blume_system.config.PlayerScoreboard;
 import blume_system.general.Main;
 
 public class CommandResetbody implements CommandExecutor {
@@ -23,6 +25,8 @@ public class CommandResetbody implements CommandExecutor {
             	Main.getPluginInstance().getConfig().set("players.uuid-" + p.getUniqueId().toString() + ".level_butcher", "0");
             	Main.getPluginInstance().getConfig().set("players.uuid-" + p.getUniqueId().toString() + ".level_warrior", "0");
             	Main.getPluginInstance().getConfig().set("players.uuid-" + p.getUniqueId().toString() + ".currency", "0");
+            	
+            	Level.globalLevel(p); //refresh stats
             	
             	p.sendMessage(ChatTags.logSystem() + "All stats now cleared.");
             	

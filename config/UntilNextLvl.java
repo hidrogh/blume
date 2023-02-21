@@ -27,8 +27,8 @@ public class UntilNextLvl {
 			pointsLeft = lvl[4] - Integer.parseInt(currentPlayerLevel);
 		} else if (currentPlayerRank.equals(rank[5])) {
 			pointsLeft = lvl[5] - Integer.parseInt(currentPlayerLevel);
-		} else if (currentPlayerRank.equals(rank[6])) {
-			pointsLeft = lvl[6] - Integer.parseInt(currentPlayerLevel);
+		} else if (currentPlayerRank.equals(rank[6])) { //if player got max level
+			pointsLeft = 987654321;
 		}
 		
 		return pointsLeft;

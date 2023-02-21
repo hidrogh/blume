@@ -29,7 +29,29 @@ public class Level {
 		String butcherLevel = Main.getPluginInstance().getConfig().getString("players.uuid-" + p.getUniqueId().toString() + ".level_butcher");
 		String warriorLevel = Main.getPluginInstance().getConfig().getString("players.uuid-" + p.getUniqueId().toString() + ".level_warrior");
 		
-		Main.getPluginInstance().getConfig().set("players.uuid-" + p.getUniqueId().toString() + ".level_global", Integer.parseInt(minerLevel) + Integer.parseInt(farmerLevel) + Integer.parseInt(butcherLevel) + Integer.parseInt(warriorLevel));
+		int sum = Integer.parseInt(minerLevel) + Integer.parseInt(farmerLevel) + Integer.parseInt(butcherLevel) + Integer.parseInt(warriorLevel);
+		
+		if (sum < 0) { //negative amount of level (not possible without a bug)
+			System.out.print(Log.logError() + p.getName() + " [" + p.getUniqueId() + "] got a negative amount of level");
+			sum = 0;
+			
+			DisconnectMessages.kickForError();
+		}
+		if (sum >= Config.maxLevelAmount) { //if player goes higher than java integer value (max amount of money) every values will get reset to prevent errors
+			sum = 0;
+			Main.getPluginInstance().getConfig().set("players.uuid-" + p.getUniqueId().toString() + ".status", Config.rank1);
+			Main.getPluginInstance().getConfig().set("players.uuid-" + p.getUniqueId().toString() + ".level_global", "0");
+			Main.getPluginInstance().getConfig().set("players.uuid-" + p.getUniqueId().toString() + ".level_miner", "0");
+			Main.getPluginInstance().getConfig().set("players.uuid-" + p.getUniqueId().toString() + ".level_farmer", "0");
+			Main.getPluginInstance().getConfig().set("players.uuid-" + p.getUniqueId().toString() + ".level_butcher", "0");
+			Main.getPluginInstance().getConfig().set("players.uuid-" + p.getUniqueId().toString() + ".level_warrior", "0");
+			
+			Warning.giveWarning(p);
+			
+			DisconnectMessages.kickForError();
+		}
+		
+		Main.getPluginInstance().getConfig().set("players.uuid-" + p.getUniqueId().toString() + ".level_global", Integer.toString(sum));
 		
 		Config.refreshGlobalRank(p); //refresh rank inside config file
 		

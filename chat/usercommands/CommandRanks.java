@@ -25,45 +25,45 @@ public class CommandRanks implements CommandExecutor {
 	        p.sendMessage("");
 	        p.sendMessage(ChatTags.logBlume() + ChatColor.GRAY + "List of all ranks: (Your points: " + ChatColor.GRAY + playerPoints + ")");
 	        if (playerPoints < Config.r2_points) {
-	        	p.sendMessage(ChatColor.GRAY + "     - " + ChatColor.GRAY + Config.rank1.substring(0, 1).toUpperCase() + Config.rank1.substring(1) + ChatColor.GRAY + ": " + ChatColor.WHITE + "0" + ChatColor.GRAY + " (Your rank)");
+	        	p.sendMessage(ChatColor.GRAY + "     - " + Config.r1c + Config.rank1.substring(0, 1).toUpperCase() + Config.rank1.substring(1) + ChatColor.GRAY + ": " + ChatColor.WHITE + "0" + ChatColor.GRAY + " (Your rank)");
 	        } else {
-	        	p.sendMessage(ChatColor.GRAY + "     - " + ChatColor.GRAY + Config.rank1.substring(0, 1).toUpperCase() + Config.rank1.substring(1) + ChatColor.GRAY + ": " + ChatColor.WHITE + "0");
+	        	p.sendMessage(ChatColor.GRAY + "     - " + Config.r1c + Config.rank1.substring(0, 1).toUpperCase() + Config.rank1.substring(1) + ChatColor.GRAY + ": " + ChatColor.WHITE + "0");
 	        }
 	        	
 	        if (playerPoints >= Config.r2_points && playerPoints < Config.r3_points) {
-	        	p.sendMessage(ChatColor.GRAY + "     - " + ChatColor.GRAY + Config.rank2.substring(0, 1).toUpperCase() + Config.rank2.substring(1) + ChatColor.GRAY + ": " + ChatColor.WHITE + Config.r2_points + ChatColor.GRAY + " (Your rank)");
+	        	p.sendMessage(ChatColor.GRAY + "     - " + Config.r2c + Config.rank2.substring(0, 1).toUpperCase() + Config.rank2.substring(1) + ChatColor.GRAY + ": " + ChatColor.WHITE + Config.r2_points + ChatColor.GRAY + " (Your rank)");
 	        } else {
-	        	p.sendMessage(ChatColor.GRAY + "     - " + ChatColor.GRAY + Config.rank2.substring(0, 1).toUpperCase() + Config.rank2.substring(1) + ChatColor.GRAY + ": " + ChatColor.WHITE + Config.r2_points);
+	        	p.sendMessage(ChatColor.GRAY + "     - " + Config.r2c + Config.rank2.substring(0, 1).toUpperCase() + Config.rank2.substring(1) + ChatColor.GRAY + ": " + ChatColor.WHITE + Config.r2_points);
 	        }
 	        
 	        if (playerPoints >= Config.r3_points && playerPoints < Config.r4_points) {
-	        	p.sendMessage(ChatColor.GRAY + "     - " + ChatColor.BLUE + Config.rank3.substring(0, 1).toUpperCase() + Config.rank3.substring(1) + ChatColor.GRAY + ": " + ChatColor.WHITE + Config.r3_points + ChatColor.GRAY + " (Your rank)");
+	        	p.sendMessage(ChatColor.GRAY + "     - " + Config.r3c + Config.rank3.substring(0, 1).toUpperCase() + Config.rank3.substring(1) + ChatColor.GRAY + ": " + ChatColor.WHITE + Config.r3_points + ChatColor.GRAY + " (Your rank)");
 	        } else {
-	        	p.sendMessage(ChatColor.GRAY + "     - " + ChatColor.BLUE + Config.rank3.substring(0, 1).toUpperCase() + Config.rank3.substring(1) + ChatColor.GRAY + ": " + ChatColor.WHITE + Config.r3_points);
+	        	p.sendMessage(ChatColor.GRAY + "     - " + Config.r3c + Config.rank3.substring(0, 1).toUpperCase() + Config.rank3.substring(1) + ChatColor.GRAY + ": " + ChatColor.WHITE + Config.r3_points);
 	        }
 	        	
 	        if (playerPoints >= Config.r4_points && playerPoints < Config.r5_points) {
-	        	p.sendMessage(ChatColor.GRAY + "     - " + ChatColor.BLUE + Config.rank4.substring(0, 1).toUpperCase() + Config.rank4.substring(1) + ChatColor.GRAY + ": " + ChatColor.WHITE + Config.r4_points + ChatColor.GRAY + " (Your rank)");
+	        	p.sendMessage(ChatColor.GRAY + "     - " + Config.r4c + Config.rank4.substring(0, 1).toUpperCase() + Config.rank4.substring(1) + ChatColor.GRAY + ": " + ChatColor.WHITE + Config.r4_points + ChatColor.GRAY + " (Your rank)");
 	        } else {
-	        	p.sendMessage(ChatColor.GRAY + "     - " + ChatColor.BLUE + Config.rank4.substring(0, 1).toUpperCase() + Config.rank4.substring(1) + ChatColor.GRAY + ": " + ChatColor.WHITE + Config.r4_points);
+	        	p.sendMessage(ChatColor.GRAY + "     - " + Config.r4c + Config.rank4.substring(0, 1).toUpperCase() + Config.rank4.substring(1) + ChatColor.GRAY + ": " + ChatColor.WHITE + Config.r4_points);
 	        }
 	        	
 	        if (playerPoints >= Config.r5_points && playerPoints < Config.r6_points) {
-	        	p.sendMessage(ChatColor.GRAY + "     - " + ChatColor.GREEN + Config.rank5.substring(0, 1).toUpperCase() + Config.rank5.substring(1) + ChatColor.GRAY + ": " + ChatColor.WHITE + Config.r5_points + ChatColor.GRAY + " (Your rank)");
+	        	p.sendMessage(ChatColor.GRAY + "     - " + Config.r5c + Config.rank5.substring(0, 1).toUpperCase() + Config.rank5.substring(1) + ChatColor.GRAY + ": " + ChatColor.WHITE + Config.r5_points + ChatColor.GRAY + " (Your rank)");
 	        } else {
-	        	p.sendMessage(ChatColor.GRAY + "     - " + ChatColor.GREEN + Config.rank5.substring(0, 1).toUpperCase() + Config.rank5.substring(1) + ChatColor.GRAY + ": " + ChatColor.WHITE + Config.r5_points);
+	        	p.sendMessage(ChatColor.GRAY + "     - " + Config.r5c + Config.rank5.substring(0, 1).toUpperCase() + Config.rank5.substring(1) + ChatColor.GRAY + ": " + ChatColor.WHITE + Config.r5_points);
 	        }
 	        	
 	        if (playerPoints >= Config.r6_points && playerPoints < Config.r7_points) {
-	        	p.sendMessage(ChatColor.GRAY + "     - " + ChatColor.GREEN + Config.rank6.substring(0, 1).toUpperCase() + Config.rank6.substring(1) + ChatColor.GRAY + ": " + ChatColor.WHITE + Config.r6_points + ChatColor.GRAY + " (Your rank)");
+	        	p.sendMessage(ChatColor.GRAY + "     - " + Config.r6c + Config.rank6.substring(0, 1).toUpperCase() + Config.rank6.substring(1) + ChatColor.GRAY + ": " + ChatColor.WHITE + Config.r6_points + ChatColor.GRAY + " (Your rank)");
 	        } else {
-	        	p.sendMessage(ChatColor.GRAY + "     - " + ChatColor.GREEN + Config.rank6.substring(0, 1).toUpperCase() + Config.rank6.substring(1) + ChatColor.GRAY + ": " + ChatColor.WHITE + Config.r6_points);
+	        	p.sendMessage(ChatColor.GRAY + "     - " + Config.r6c + Config.rank6.substring(0, 1).toUpperCase() + Config.rank6.substring(1) + ChatColor.GRAY + ": " + ChatColor.WHITE + Config.r6_points);
 	        }
 	        	
 	        if (playerPoints >= Config.r7_points) {
-	        	p.sendMessage(ChatColor.GRAY + "     - " + ChatColor.YELLOW + Config.rank7.substring(0, 1).toUpperCase() + Config.rank7.substring(1) + ChatColor.GRAY + ": " + ChatColor.WHITE + Config.r7_points + ChatColor.GRAY + " (Your rank)");
+	        	p.sendMessage(ChatColor.GRAY + "     - " + Config.r7c + Config.rank7.substring(0, 1).toUpperCase() + Config.rank7.substring(1) + ChatColor.GRAY + ": " + ChatColor.WHITE + Config.r7_points + ChatColor.GRAY + " (Your rank)");
 	        } else {
-	        	p.sendMessage(ChatColor.GRAY + "     - " + ChatColor.YELLOW + Config.rank7.substring(0, 1).toUpperCase() + Config.rank7.substring(1) + ChatColor.GRAY + ": " + ChatColor.WHITE + Config.r7_points);
+	        	p.sendMessage(ChatColor.GRAY + "     - " + Config.r7c + Config.rank7.substring(0, 1).toUpperCase() + Config.rank7.substring(1) + ChatColor.GRAY + ": " + ChatColor.WHITE + Config.r7_points);
 	        }
 	        
 	        p.sendMessage("");
