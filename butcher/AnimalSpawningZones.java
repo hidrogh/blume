@@ -5,7 +5,12 @@ import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.entity.Entity;
+import org.bukkit.entity.EntityType;
+import org.bukkit.entity.LivingEntity;
 import org.bukkit.event.Listener;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
+
 import blume_system.general.Log;
 import blume_system.general.Main;
 import blume_system.settings.Config;
@@ -19,58 +24,59 @@ public class AnimalSpawningZones implements Listener {
 	
 	public static int[] zones = AnimalZoneSort.zones; //all zones (sorted)
 	
-	public AnimalSpawningZones() {
+	public static void animalAmountRefresh() {
 	    Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(Main.getPluginInstance(), new Runnable() {
             @Override
             public void run() {
+            	/*
+            	 * it needs to be = not > or <
+            	 */
             	
-            	if (AnimalContainer.getChickenAmount() < Config.aMaxAmountChicken) {
-            		Location loc = randomZone(zones[0], zones[1], zones[2], zones[3], zones[4], zones[5]);
-            		loc.getWorld().spawnEntity(loc, Config.aTypeChicken).setCustomName(Config.aNameChicken); //spawner
-            	}
-            	if (AnimalContainer.getPigAmount() < Config.aMaxAmountPig) {
-            		Location loc = randomZone(zones[6], zones[7], zones[8], zones[9], zones[10], zones[11]);
-            		loc.getWorld().spawnEntity(loc, Config.aTypePig).setCustomName(Config.aNamePig); 
-            	}
-            	if (AnimalContainer.getSheepAmount() < Config.aMaxAmountSheep) {
-            		Location loc = randomZone(zones[12], zones[13], zones[14], zones[15], zones[16], zones[17]);
-            		loc.getWorld().spawnEntity(loc, Config.aTypeSheep).setCustomName(Config.aNameSheep);
-            	}
-            	if (AnimalContainer.getCowAmount() < Config.aMaxAmountCow) {
-            		Location loc = randomZone(zones[18], zones[19], zones[20], zones[21], zones[22], zones[23]);
-            		loc.getWorld().spawnEntity(loc, Config.aTypeCow).setCustomName(Config.aNameCow);
-            	}
+            	//set current amount of animals in the world
+            	setAnimalCounts();
             	
+            	//chicken controller
+            	if (Bukkit.getWorld(Config.getWorldName()).getPlayers().size() != 0) {
+	            	if (getAnimalCount(Config.aTypeChicken) < Config.aMaxAmountChicken) {
+	            		Location loc = randomZone(zones[0], zones[1], zones[2], zones[3], zones[4], zones[5]);
+	            		loc.getWorld().spawnEntity(loc, Config.aTypeChicken).setCustomName(Config.aNameChicken); //spawner
+	            	}
+	            	if (getAnimalCount(Config.aTypeChicken) > Config.aMaxAmountChicken) {
+	            		killAnimal(Config.aTypeChicken);
+	            	}
+	            	
+	            	//pig controller
+	            	if (getAnimalCount(Config.aTypePig) < Config.aMaxAmountPig) {
+	            		Location loc = randomZone(zones[6], zones[7], zones[8], zones[9], zones[10], zones[11]);
+	            		loc.getWorld().spawnEntity(loc, Config.aTypePig).setCustomName(Config.aNamePig); 
+	            	}
+	            	if (getAnimalCount(Config.aTypePig) > Config.aMaxAmountPig) {
+	            		killAnimal(Config.aTypePig);
+	            	}
+	            	
+	            	//sheep controller
+	            	if (getAnimalCount(Config.aTypeSheep) < Config.aMaxAmountSheep) {
+	            		Location loc = randomZone(zones[12], zones[13], zones[14], zones[15], zones[16], zones[17]);
+	            		loc.getWorld().spawnEntity(loc, Config.aTypeSheep).setCustomName(Config.aNameSheep);
+	            	}
+	            	if (getAnimalCount(Config.aTypeSheep) > Config.aMaxAmountSheep) {
+	            		killAnimal(Config.aTypeSheep);
+	            	}
+	            	
+	            	//cow controller
+	            	if (getAnimalCount(Config.aTypeCow) < Config.aMaxAmountCow) {
+	            		Location loc = randomZone(zones[18], zones[19], zones[20], zones[21], zones[22], zones[23]);
+	            		loc.getWorld().spawnEntity(loc, Config.aTypeCow).setCustomName(Config.aNameCow);
+	            	}
+	            	if (getAnimalCount(Config.aTypeCow) > Config.aMaxAmountCow) {
+	            		killAnimal(Config.aTypeCow);
+	            	}
+            	}
             }
         }, 1);
-	    
-	    int animalCount[] = {0,0,0,0};
-	    for(Entity e : Bukkit.getWorld(Config.getWorldName()).getEntities()) {
-	    	if (e.getType() == Config.aTypeChicken && e.getCustomName() == Config.aNameChicken) {
-	    		animalCount[0]++;
-	    	}
-	    	if (e.getType() == Config.aTypePig && e.getCustomName() == Config.aNamePig) {
-	    		animalCount[1]++;
-	    	}
-	    	if (e.getType() == Config.aTypeSheep && e.getCustomName() == Config.aNameSheep) {
-	    		animalCount[2]++;
-	    	}
-	    	if (e.getType() == Config.aTypeCow && e.getCustomName() == Config.aNameCow) {
-	    		animalCount[3]++;
-	    	}
-	    }
-	    AnimalContainer.setChickenAmount(animalCount[0]);
-	    AnimalContainer.setPigAmount(animalCount[1]);
-	    AnimalContainer.setSheepAmount(animalCount[2]);
-	    AnimalContainer.setCowAmount(animalCount[3]);
-	    
-	    animalCount[0] = 0; //reset counters
-	    animalCount[1] = 0;
-	    animalCount[2] = 0;
-	    animalCount[3] = 0;
 	}
 	
-	public Location randomZone(int x, int y, int z, int x2, int y2, int z2) { //enter zone cords and get random inside back
+	public static Location randomZone(int x, int y, int z, int x2, int y2, int z2) { //enter zone cords and get random inside back
 		int X = (int)(Math.random()*(x2-x))+x;
 		int Y = 0; //can not be random because it is y
 		int Z = (int)(Math.random()*(z2-z))+z;
@@ -98,5 +104,40 @@ public class AnimalSpawningZones implements Listener {
 		}
 
 		return loc;
+	}
+	
+	public static void killAnimal(EntityType animalType) {
+		if (Bukkit.getWorld(Config.getWorldName()).getPlayers().size() != 0) { //to prevent bugs if server needs to load entity numbers first
+			int counter = 0;
+			int counter2 = 0;
+			for(Entity e : Bukkit.getWorld(Config.getWorldName()).getEntities()) { //count all specific animals
+	    		if (e.getType() == animalType) {
+	    			counter++;
+	    		}
+	    	}
+			for(Entity e : Bukkit.getWorld(Config.getWorldName()).getEntities()) { //only count this specific animal
+	    		if (e.getType() == animalType && counter2 < counter) {
+	    			counter2++;
+	    			((LivingEntity) e).addPotionEffect(new PotionEffect(PotionEffectType.HARM, 10000, 100)); //kills instantly
+	    		}
+	    	}
+		}
+	}
+	
+	public static int getAnimalCount(EntityType animalType) {
+		int counter = 0;
+		for(Entity e : Bukkit.getWorld(Config.getWorldName()).getEntities()) {
+    		if (e.getType() == animalType) {
+    			counter++;
+    		}
+    	}
+		return counter;
+	}
+	
+	public static void setAnimalCounts() {
+    	AnimalController.setChickenAmount(getAnimalCount(Config.aTypeChicken));
+    	AnimalController.setPigAmount(getAnimalCount(Config.aTypePig));
+    	AnimalController.setSheepAmount(getAnimalCount(Config.aTypeSheep));
+    	AnimalController.setCowAmount(getAnimalCount(Config.aTypeCow));
 	}
 }

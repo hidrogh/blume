@@ -65,7 +65,7 @@ public class Config {
 		
 		Main.getPluginInstance().getConfig().set(uuid + ".currency", 0); //currency amount (xp bar)
 		
-		Main.getPluginInstance().getConfig().set(uuid + ".status", ""); //ranks
+		Main.getPluginInstance().getConfig().set(uuid + ".status", "newbie"); //ranks
 		
 		Main.getPluginInstance().getConfig().set(uuid + ".warned", 0); //amount of system warning
 	}
@@ -253,24 +253,31 @@ public class Config {
 	public static int aMaxAmountChicken = 1;
 	public static int aRewardChicken = 1;
 	public static String aChickenBanner = ChatColor.GRAY + "+1 " + ChatColor.WHITE + "lvl";
+	public static String aConfigNameChicken = "chickenAmount";
+	
 	
 	public static EntityType aTypePig = EntityType.PIG;
 	public static String aNamePig = ChatColor.GOLD + "§lLevel 2";
 	public static int aMaxAmountPig = 1;
 	public static int aRewardPig = 2;
 	public static String aPigBanner = ChatColor.GOLD + "+2 " + ChatColor.WHITE + "lvl";
+	public static String aConfigNamePig = "pigAmount";
+	
 	
 	public static EntityType aTypeSheep = EntityType.SHEEP;
 	public static String aNameSheep = ChatColor.AQUA + "§lLevel 3";
 	public static int aMaxAmountSheep = 1;
 	public static int aRewardSheep = 4;
 	public static String aSheepBanner = ChatColor.AQUA + "+4 " + ChatColor.WHITE + "lvl";
+	public static String aConfigNameSheep = "sheepAmount";
+	
 	
 	public static EntityType aTypeCow = EntityType.COW;
 	public static String aNameCow = ChatColor.GREEN + "§lLevel 4";
 	public static int aMaxAmountCow = 1;
 	public static int aRewardCow = 8;
 	public static String aCowBanner = ChatColor.GREEN + "+8 " + ChatColor.WHITE + "lvl";
+	public static String aConfigNameCow = "cowAmount";
 	
 	
 	

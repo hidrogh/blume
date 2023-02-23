@@ -63,7 +63,7 @@ public class Updater {
 	private void delayA() {
 		//---[ every 1sec ]---
 		new MineOreSpawn(); //mine world generator
-		new AnimalSpawningZones(); //animal spawning zones
+		AnimalSpawningZones.animalAmountRefresh(); //animal spawning zones
 	}
 	
 	private void delayB() {

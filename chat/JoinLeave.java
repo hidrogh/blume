@@ -12,13 +12,17 @@ import org.bukkit.scoreboard.Score;
 import org.bukkit.scoreboard.Scoreboard;
 import org.bukkit.scoreboard.ScoreboardManager;
 
+import blume_system.butcher.AnimalController;
+import blume_system.butcher.AnimalSpawningZones;
 import blume_system.config.CheckBanned;
 import blume_system.config.Currency;
-import blume_system.config.NewJoin;
+import blume_system.config.ConfigSettings;
 import blume_system.config.PlayerScoreboard;
 import blume_system.config.RankupContainer;
 import blume_system.config.Tablist;
+import blume_system.config.UntilNextLvl;
 import blume_system.general.Main;
+import blume_system.settings.Config;
 import net.md_5.bungee.api.ChatColor;
 
 public class JoinLeave implements Listener {
@@ -36,8 +40,8 @@ public class JoinLeave implements Listener {
 			e.setJoinMessage(ChatColor.GRAY + e.getPlayer().getName() + " joined");
 		}
         
-        NewJoin.addPlayer(e.getPlayer()); //add playername to config file if not contained
-        NewJoin.refreshUsername(e.getPlayer()); //refresh username if changed at mojang/microsoft
+        ConfigSettings.addPlayer(e.getPlayer()); //add playername to config file if not contained
+        ConfigSettings.refreshUsername(e.getPlayer()); //refresh username if changed at mojang/microsoft
         
         Currency.syncXP(e.getPlayer()); //sync currency from the config file with the ingame xp
         
@@ -49,6 +53,8 @@ public class JoinLeave implements Listener {
 		PlayerScoreboard.create(e.getPlayer()); //create scoreboard
 		
 		CheckBanned.check(e.getPlayer()); //check if the player is banned (didnt work)
+		
+		UntilNextLvl.validateNew(e.getPlayer()); //dont touch
 	}
 	
 	@EventHandler

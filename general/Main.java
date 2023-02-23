@@ -4,13 +4,14 @@ import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import blume_system.butcher.AnimalEvent;
-import blume_system.butcher.AnimalKillOnStart;
 import blume_system.butcher.AnimalReward;
 import blume_system.butcher.AnimalZoneSort;
 import blume_system.chat.CommandCreator;
 import blume_system.chat.JoinLeave;
 import blume_system.chat.PlayerWrite;
+import blume_system.config.ConfigSettings;
 import blume_system.config.DisconnectMessages;
+import blume_system.config.PlayerScoreboard;
 import blume_system.mining.Mining;
 import blume_system.mining.MiningZoneSort;
 import blume_system.settings.Config;
@@ -37,7 +38,7 @@ public class Main extends JavaPlugin {
     	setGamerules(); //set gamerules
     	setCommands(); //set commands
     	
-    	AnimalKillOnStart.killAnimals(); //kill all animals on reload or start
+    	ConfigSettings.addWorldSettings(); //add world settings inside the config
     }
     
     public void onDisable() {

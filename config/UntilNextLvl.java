@@ -16,25 +16,7 @@ public class UntilNextLvl {
 		String rank[] = {Config.rank1, Config.rank2, Config.rank3, Config.rank4, Config.rank5, Config.rank6, Config.rank7};
 		
 		if (currentPlayerRank.equals("operator") && !p.isOp()) { //if player has still operator rank but isnt
-			int curLvl = Integer.parseInt(currentPlayerLevel);
-			String newRank = "";
-			if (curLvl >= Config.r7_points) {
-				newRank = Config.rank7;
-			} else if (curLvl >= Config.r6_points) {
-				newRank = Config.rank6;
-			} else if (curLvl >= Config.r5_points) {
-				newRank = Config.rank5;
-			} else if (curLvl >= Config.r4_points) {
-				newRank = Config.rank4;
-			} else if (curLvl >= Config.r3_points) {
-				newRank = Config.rank3;
-			} else if (curLvl >= Config.r2_points) {
-				newRank = Config.rank2;
-			} else {
-				newRank = Config.rank1;
-			}
-			Main.getPluginInstance().getConfig().set("players.uuid-" + p.getUniqueId().toString() + ".status", newRank);
-			currentPlayerRank = newRank;
+			validateNew(p);
 		}
 		
 		int pointsLeft = 0;
@@ -58,5 +40,26 @@ public class UntilNextLvl {
 		}
 		
 		return pointsLeft;
+	}
+	
+	public static void validateNew(Player p) {
+		int curLvl = Integer.parseInt(Main.getPluginInstance().getConfig().getString("players.uuid-" + p.getUniqueId().toString() + ".level_global"));
+		String newRank = "";
+		if (curLvl >= Config.r7_points) {
+			newRank = Config.rank7;
+		} else if (curLvl >= Config.r6_points) {
+			newRank = Config.rank6;
+		} else if (curLvl >= Config.r5_points) {
+			newRank = Config.rank5;
+		} else if (curLvl >= Config.r4_points) {
+			newRank = Config.rank4;
+		} else if (curLvl >= Config.r3_points) {
+			newRank = Config.rank3;
+		} else if (curLvl >= Config.r2_points) {
+			newRank = Config.rank2;
+		} else {
+			newRank = Config.rank1;
+		}
+		Main.getPluginInstance().getConfig().set("players.uuid-" + p.getUniqueId().toString() + ".status", newRank);
 	}
 }
