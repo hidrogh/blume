@@ -59,8 +59,7 @@ public class AnimalReward implements Listener {
    		PacketPlayOutTitle title = new PacketPlayOutTitle(EnumTitleAction.TITLE, chatTitle);
    		PacketPlayOutTitle subtitle = new PacketPlayOutTitle(EnumTitleAction.SUBTITLE, chatSubtitle);
    		PacketPlayOutTitle length = new PacketPlayOutTitle(0, 5, 4);
-
-
+   		
    		((CraftPlayer) p).getHandle().playerConnection.sendPacket(title);
    		((CraftPlayer) p).getHandle().playerConnection.sendPacket(subtitle);
    		((CraftPlayer) p).getHandle().playerConnection.sendPacket(length);
@@ -72,48 +71,35 @@ public class AnimalReward implements Listener {
    			p.playSound(p.getLocation(), Sound.LEVEL_UP, 4, 5);
    			
    			Location ploc = new Location(e.getWorld(),
-   	    			
    	    			e.getLocation().getX(), //particle start position (0.5 mid of block)
    	    			e.getLocation().getY() + 0.6,
    	    			e.getLocation().getZ());
-   	    		
    	    	e.getWorld().spigot().playEffect(ploc
-   	    				
-   	    			, Effect.COLOURED_DUST,
-   	    			
-   	    			1, //id
-   	    			1, //data
-   	    			0.4f, //offsetX (particle spread)
-   	    			0.4f, //offsetY
-   	    			0.4f, //offsetZ
-   	    			0, //speed
-   	    			30, //particleCount (particles that spawn inside the zone)
-   	    			20); //radius
-   	    	
-   	    
+						   	    			, Effect.COLOURED_DUST,
+						   	    			1, //id
+						   	    			1, //data
+						   	    			0.4f, //offsetX (particle spread)
+						   	    			0.4f, //offsetY
+						   	    			0.4f, //offsetZ
+						   	    			0, //speed
+						   	    			30, //particleCount (particles that spawn inside the zone)
+						   	    			20); //radius
    		} else {
    			p.playSound(p.getLocation(), Sound.ORB_PICKUP, 2, 5);
    			Location ploc = new Location(e.getWorld(),
-   	    			
    	    			e.getLocation().getX(), //particle start position (0.5 mid of block)
    	    			e.getLocation().getY() + 0.4,
    	    			e.getLocation().getZ());
-   	    		
    	    	e.getWorld().spigot().playEffect(ploc
-   	    				
-   	    			, Effect.CRIT,
-   	    			
-   	    			1, //id
-   	    			1, //data
-   	    			0.4f, //offsetX (particle spread)
-   	    			0.4f, //offsetY
-   	    			0.4f, //offsetZ
-   	    			0, //speed
-   	    			20, //particleCount (particles that spawn inside the zone)
-   	    			30); //radius
+						   	    			, Effect.CRIT,
+						   	    			1, //id
+						   	    			1, //data
+						   	    			0.4f, //offsetX (particle spread)
+						   	    			0.4f, //offsetY
+						   	    			0.4f, //offsetZ
+						   	    			0, //speed
+						   	    			20, //particleCount (particles that spawn inside the zone)
+						   	    			30); //radius
    		}
-   		
-		
-		
 	}
 }

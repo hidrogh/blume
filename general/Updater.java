@@ -2,6 +2,8 @@ package blume_system.general;
 
 import org.bukkit.scheduler.BukkitRunnable;
 
+import blume_system.bossbar.BossBar;
+import blume_system.butcher.AnimalOutOfZone;
 import blume_system.butcher.AnimalSpawningZones;
 import blume_system.mining.MineOreSpawn;
 
@@ -62,8 +64,10 @@ public class Updater {
 	
 	private void delayA() {
 		//---[ every 1sec ]---
+		
 		new MineOreSpawn(); //mine world generator
 		AnimalSpawningZones.animalAmountRefresh(); //animal spawning zones
+		new BossBar(); //enderdragon bossbar
 	}
 	
 	private void delayB() {
@@ -78,6 +82,7 @@ public class Updater {
 	private void delayD() {
 		//---[ every 10sec ]---
 		
+		new AnimalOutOfZone(); //kill animals if out of zone
 	}
 	
 	private void delayE() {

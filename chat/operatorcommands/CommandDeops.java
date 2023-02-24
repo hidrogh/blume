@@ -22,7 +22,6 @@ public class CommandDeops implements CommandExecutor {
             	ChatMessages.notFound(p);
             }
     	}
-        
         return true;
 	}
 }

@@ -32,7 +32,7 @@ public class AnimalController {
 		return getAmount(Config.aConfigNameCow);
 	}
 	
-	
+	//write/read from and to config file
 	public static void setAmount(int amount, String animalType) { //set amount of x animal in the world
 		Main.getPluginInstance().getConfig().set("world.animals." + animalType, amount);
 	}

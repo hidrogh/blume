@@ -50,4 +50,22 @@ public class Switches {
 	public static boolean getStopWPPlayerDropItem() {
 		return stopStopWPPlayerDropItem;
 	}
+	
+	//world protection - creature spawn event (breed)
+	static boolean stopCreatureBreed;
+	public static void setStopWPCreatureBreed(boolean b) {
+		stopCreatureBreed = b;
+	}
+	public static boolean getStopWPCreatureBreed() {
+		return stopCreatureBreed;
+	}
+	
+	//world protection - enderdragon block damage
+	static boolean stopDragonDamage;
+	public static void setStopWPDragonDamage(boolean b) {
+		stopDragonDamage = b;
+	}
+	public static boolean getStopWPDragonDamage() {
+		return stopDragonDamage;
+	}
 }

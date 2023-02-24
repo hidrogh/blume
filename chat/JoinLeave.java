@@ -1,19 +1,10 @@
 package blume_system.chat;
 
-import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
-import org.bukkit.scoreboard.DisplaySlot;
-import org.bukkit.scoreboard.Objective;
-import org.bukkit.scoreboard.Score;
-import org.bukkit.scoreboard.Scoreboard;
-import org.bukkit.scoreboard.ScoreboardManager;
-
-import blume_system.butcher.AnimalController;
-import blume_system.butcher.AnimalSpawningZones;
 import blume_system.config.CheckBanned;
 import blume_system.config.Currency;
 import blume_system.config.ConfigSettings;
@@ -22,7 +13,6 @@ import blume_system.config.RankupContainer;
 import blume_system.config.Tablist;
 import blume_system.config.UntilNextLvl;
 import blume_system.general.Main;
-import blume_system.settings.Config;
 import net.md_5.bungee.api.ChatColor;
 
 public class JoinLeave implements Listener {

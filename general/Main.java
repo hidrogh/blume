@@ -3,6 +3,7 @@ package blume_system.general;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import blume_system.bossbar.BossBar;
 import blume_system.butcher.AnimalEvent;
 import blume_system.butcher.AnimalReward;
 import blume_system.butcher.AnimalZoneSort;

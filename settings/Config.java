@@ -34,10 +34,9 @@ public class Config {
 	 *	get location if red line they will die
 	 *	stop animal xp drop
 	 *  out of zone kill
-	 *  blood effects on animals 
-	 *  sound and banner
-	 *  when animals spawn particle effect
-	 *  - ERROR : if you rejoin and leave and rejoin... animals will double because animals container is not permanenent. config file is needed
+	 *  
+	 *  - enderdragon needs to be spawned at all directions, bottom, top left right...
+	 *
 	 */
 	
 	
@@ -221,6 +220,7 @@ public class Config {
 	 * - enter from: x,y,z   and   to: x,y,z (sorting is not needed)
 	 * - multiple zones can be stacked over each other
 	 * - spawn location should not have holes under the area, animals will spawn there (use a solid floor)
+	 * - do not add zones
 	 */
 	public static int[] getAnimalSpawningZones() {
 		int[] animalZones = {

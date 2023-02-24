@@ -21,19 +21,16 @@ public class AnimalZoneSort {
 			
 			if (zones[a] > zones[a+3]) { //if zone0 (from) is bigger than zone3 (to)
 				tempSave = zones[a];
-				
 				zones[a] = zones[a+3];
 				zones[a+3] = tempSave;
 			}
 			if (zones[a+1] > zones[a+4]) {
 				tempSave = zones[a+1];
-				
 				zones[a+1] = zones[a+4];
 				zones[a+4] = tempSave;
 			}
 			if (zones[a+2] > zones[a+5]) {
 				tempSave = zones[a+2];
-				
 				zones[a+2] = zones[a+5];
 				zones[a+5] = tempSave;
 			}

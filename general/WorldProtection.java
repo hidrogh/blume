@@ -1,13 +1,21 @@
 package blume_system.general;
 
+import org.bukkit.World;
+import org.bukkit.entity.EnderDragon;
+import org.bukkit.entity.Entity;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockExpEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
+import org.bukkit.event.entity.CreatureSpawnEvent;
+import org.bukkit.event.entity.CreatureSpawnEvent.SpawnReason;
+import org.bukkit.event.entity.EntityExplodeEvent;
 import org.bukkit.event.entity.ItemSpawnEvent;
 import org.bukkit.event.player.PlayerDropItemEvent;
+
+import net.minecraft.server.v1_8_R1.EntityComplexPart;
 
 public class WorldProtection implements Listener {
 	
@@ -70,4 +78,25 @@ public class WorldProtection implements Listener {
 			Switches.setStopWPPlayerDropItem(false); //reset
 		}
 	}
+	
+	//STOP ENTITY BREED EVENT
+	@EventHandler(priority=EventPriority.MONITOR)
+    public void onBreeding(CreatureSpawnEvent e) {
+		if (Switches.getStopWPCreatureBreed() == false && e.getSpawnReason().equals(SpawnReason.BREEDING)) {
+			e.setCancelled(true);
+		} else {
+			Switches.setStopWPCreatureBreed(false); //reset
+		}
+    }
+	
+	//STOP DRAGON BLOCK DAMAGE
+	@EventHandler(priority=EventPriority.MONITOR)
+    public void stopDragonDamage(EntityExplodeEvent e) {
+    if(e instanceof EnderDragon)
+    	if (Switches.getStopWPDragonDamage() == false) {
+    		 e.setCancelled(true);
+    	} else {
+    		Switches.setStopWPDragonDamage(false); //reset
+    	}
+    }
 }

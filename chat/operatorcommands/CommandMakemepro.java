@@ -33,7 +33,6 @@ public class CommandMakemepro implements CommandExecutor {
             	ChatMessages.notFound(p);
             }
     	}
-        
         return true;
 	}
 }

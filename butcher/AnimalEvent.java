@@ -13,24 +13,28 @@ import blume_system.settings.Config;
 
 public class AnimalEvent implements Listener {
 	@EventHandler
-	public void onZombieSpawn(CreatureSpawnEvent e){
+	public void onEntitySpawn(CreatureSpawnEvent e){
+		
+		/*
+		 * animal spawn event
+		 * 
+		 * can be used, disabled because of animals should walk freely
+		 */
 		
 		//needs a little delay because this event cant detect the name right away
-	    Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(Main.getPluginInstance(), new Runnable() {
-            @Override
-            public void run() {
-            	
-                if (e.getEntity() instanceof LivingEntity && e.getEntity().getCustomName() != null) {
-                	if (e.getEntity().getCustomName().equals(Config.aNameChicken) && e.getEntity().getType() == Config.aTypeChicken || 
-                		e.getEntity().getCustomName().equals(Config.aNamePig) && e.getEntity().getType() == Config.aTypePig ||
-                		e.getEntity().getCustomName().equals(Config.aNameSheep) && e.getEntity().getType() == Config.aTypeSheep ||
-                		e.getEntity().getCustomName().equals(Config.aNameCow) && e.getEntity().getType() == Config.aTypeCow) {
-                		
-                		((LivingEntity)e.getEntity()).addPotionEffect(new PotionEffect(PotionEffectType.SLOW,10000, 255)); //no walk
-                	}
-                }
-                
-            }
-        }, 1);
+//	    Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(Main.getPluginInstance(), new Runnable() {
+//            @Override
+//            public void run() {
+//                if (e.getEntity() instanceof LivingEntity && e.getEntity().getCustomName() != null) {
+//                	if (e.getEntity().getCustomName().equals(Config.aNameChicken) && e.getEntity().getType() == Config.aTypeChicken || 
+//                		e.getEntity().getCustomName().equals(Config.aNamePig) && e.getEntity().getType() == Config.aTypePig ||
+//                		e.getEntity().getCustomName().equals(Config.aNameSheep) && e.getEntity().getType() == Config.aTypeSheep ||
+//                		e.getEntity().getCustomName().equals(Config.aNameCow) && e.getEntity().getType() == Config.aTypeCow) {
+//                		
+//                		((LivingEntity)e.getEntity()).addPotionEffect(new PotionEffect(PotionEffectType.SLOW, Integer.MAX_VALUE, 255)); //no walk
+//                	}
+//                }
+//            }
+//        }, 1);
     }
 }
