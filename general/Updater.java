@@ -5,6 +5,7 @@ import org.bukkit.scheduler.BukkitRunnable;
 import blume_system.bossbar.BossBar;
 import blume_system.butcher.AnimalOutOfZone;
 import blume_system.butcher.AnimalSpawningZones;
+import blume_system.config.VillagerMove;
 import blume_system.mining.MineOreSpawn;
 
 public class Updater {
@@ -72,6 +73,8 @@ public class Updater {
 	
 	private void delayB() {
 		//---[ every 3sec ]---
+		
+		new VillagerMove(); //moves villager back to official position
 	}
 	
 	private void delayC() {

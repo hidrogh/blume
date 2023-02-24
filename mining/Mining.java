@@ -9,6 +9,8 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
+
+import blume_system.config.Controller;
 import blume_system.general.Main;
 import blume_system.general.Switches;
 import blume_system.settings.Config;
@@ -66,6 +68,8 @@ public class Mining implements Listener {
 	                        @Override
 	                        public void run() {
 	                        	Bukkit.getServer().getWorld(e.getBlock().getWorld().getName()).getBlockAt(blockLoc).setType(blockReplaceMaterial); //place block
+	                        	
+	                        	Controller.giveItem64Max(Config.minerItemType, e.getPlayer(), Config.minerItemName, Config.minerRewardDesc);
 	                        	
 	                        	Config.miningReward(e.getPlayer()); //give player currency
 	                        	

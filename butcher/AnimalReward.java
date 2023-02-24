@@ -2,6 +2,7 @@ package blume_system.butcher;
 
 import org.bukkit.Effect;
 import org.bukkit.Location;
+import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.craftbukkit.v1_8_R1.entity.CraftPlayer;
 import org.bukkit.entity.Entity;
@@ -10,9 +11,13 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDeathEvent;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 
+import blume_system.config.Controller;
 import blume_system.config.Level;
 import blume_system.settings.Config;
+import net.md_5.bungee.api.ChatColor;
 import net.minecraft.server.v1_8_R1.ChatSerializer;
 import net.minecraft.server.v1_8_R1.EnumTitleAction;
 import net.minecraft.server.v1_8_R1.IChatBaseComponent;
@@ -32,22 +37,25 @@ public class AnimalReward implements Listener {
         	   Level.addLevelButcher(Config.aRewardChicken, e.getEntity().getKiller());
         	   chatSubtitle = ChatSerializer.a("{\"text\": \"" +  Config.aChickenBanner + "\"}");
         	   animalAnimation(e.getEntity(), e.getEntity().getKiller());
+        	   Controller.giveItem64Max(Config.aRewardItem, e.getEntity().getKiller(), Config.aRewardItemName, Config.aRewardDesc);
         	   
            } else if (e.getEntity().getType() == Config.aTypePig) {
         	   Level.addLevelButcher(Config.aRewardPig, e.getEntity().getKiller());
         	   chatSubtitle = ChatSerializer.a("{\"text\": \"" +  Config.aPigBanner + "\"}");
         	   animalAnimation(e.getEntity(), e.getEntity().getKiller());
+        	   Controller.giveItem64Max(Config.aRewardItem, e.getEntity().getKiller(), Config.aRewardItemName, Config.aRewardDesc);
         	   
            } else if (e.getEntity().getType() == Config.aTypeSheep) {
         	   Level.addLevelButcher(Config.aRewardSheep, e.getEntity().getKiller());
         	   chatSubtitle = ChatSerializer.a("{\"text\": \"" +  Config.aSheepBanner + "\"}");
         	   animalAnimation(e.getEntity(), e.getEntity().getKiller());
+        	   Controller.giveItem64Max(Config.aRewardItem, e.getEntity().getKiller(), Config.aRewardItemName, Config.aRewardDesc);
         	   
            } else if (e.getEntity().getType() == Config.aTypeCow) {
         	   Level.addLevelButcher(Config.aRewardCow, e.getEntity().getKiller());
         	   chatSubtitle = ChatSerializer.a("{\"text\": \"" +  Config.aCowBanner + "\"}");
         	   animalAnimation(e.getEntity(), e.getEntity().getKiller());
-        	   
+        	   Controller.giveItem64Max(Config.aRewardItem, e.getEntity().getKiller(), Config.aRewardItemName, Config.aRewardDesc);
            }
         }
     }

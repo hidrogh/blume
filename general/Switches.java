@@ -68,4 +68,13 @@ public class Switches {
 	public static boolean getStopWPDragonDamage() {
 		return stopDragonDamage;
 	}
+	
+	//world protection - stop villager damage event
+	static boolean stopVillagerDamage;
+	public static void setStopWPVillagerDamage(boolean b) {
+		stopVillagerDamage = b;
+	}
+	public static boolean getStopWPVillagerDamage() {
+		return stopVillagerDamage;
+	}
 }

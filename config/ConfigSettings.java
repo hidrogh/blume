@@ -1,5 +1,6 @@
 package blume_system.config;
 
+import org.bukkit.Location;
 import org.bukkit.entity.Player;
 
 import blume_system.general.Log;
@@ -41,5 +42,56 @@ public class ConfigSettings {
 			
 			Main.getPluginInstance().saveConfig(); //save config
 		}
+	}
+	
+	public static void createVillagerLoc() {
+		if (!Main.getPluginInstance().getConfig().contains(Config.v + Config.v1)) {
+			Main.getPluginInstance().getConfig().set(Config.v + Config.v1, 0);
+			Main.getPluginInstance().saveConfig();
+		}
+		if (!Main.getPluginInstance().getConfig().contains(Config.v + Config.v2)) {
+			Main.getPluginInstance().getConfig().set(Config.v + Config.v2, 0);
+			Main.getPluginInstance().saveConfig();
+		}
+		if (!Main.getPluginInstance().getConfig().contains(Config.v + Config.v3)) {
+			Main.getPluginInstance().getConfig().set(Config.v + Config.v3, 0);
+			Main.getPluginInstance().saveConfig();
+		}
+		if (!Main.getPluginInstance().getConfig().contains(Config.v + Config.v4)) {
+			Main.getPluginInstance().getConfig().set(Config.v + Config.v4, 0);
+			Main.getPluginInstance().saveConfig();
+		}
+	}
+	
+	public static void setVillagerBuyer(Location loc) {
+		Main.getPluginInstance().getConfig().set(Config.v + Config.v1, loc.getBlockX() + "," + loc.getBlockY() + "," + loc.getBlockZ());
+		Main.getPluginInstance().saveConfig();
+	}
+	public static String getVillagerBuyer() {
+		return Main.getPluginInstance().getConfig().getString(Config.v + Config.v1);
+	}
+	
+	public static void setVillagerSeller(Location loc) {
+		Main.getPluginInstance().getConfig().set(Config.v + Config.v2, loc.getBlockX() + "," + loc.getBlockY() + "," + loc.getBlockZ());
+		Main.getPluginInstance().saveConfig();
+	}
+	public static String getVillagerSeller() {
+		return Main.getPluginInstance().getConfig().getString(Config.v + Config.v2);
+	}
+	
+	public static void setVillagerBank(Location loc) {
+		Main.getPluginInstance().getConfig().set(Config.v + Config.v3, loc.getBlockX() + "," + loc.getBlockY() + "," + loc.getBlockZ());
+		Main.getPluginInstance().saveConfig();
+	}
+	public static String getVillagerBank() {
+		return Main.getPluginInstance().getConfig().getString(Config.v + Config.v3);
+	}
+	
+	public static void setVillagerLevel(Location loc) {
+		Main.getPluginInstance().getConfig().set(Config.v + Config.v4, loc.getBlockX() + "," + loc.getBlockY() + "," + loc.getBlockZ());
+		Main.getPluginInstance().saveConfig();
+	}
+	public static String getVillagerLevel() {
+		return Main.getPluginInstance().getConfig().getString(Config.v + Config.v4);
 	}
 }

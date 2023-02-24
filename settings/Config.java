@@ -5,11 +5,17 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 
+import blume_system.chat.ChatTags;
 import blume_system.chat.operatorcommands.CommandDeops;
 import blume_system.chat.operatorcommands.CommandMakemepro;
 import blume_system.chat.operatorcommands.CommandOps;
 import blume_system.chat.operatorcommands.CommandRankuptest;
 import blume_system.chat.operatorcommands.CommandResetbody;
+import blume_system.chat.operatorcommands.CommandSpawn_bank;
+import blume_system.chat.operatorcommands.CommandSpawn_buyer;
+import blume_system.chat.operatorcommands.CommandSpawn_level;
+import blume_system.chat.operatorcommands.CommandSpawn_seller;
+import blume_system.chat.operatorcommands.CommandVillageroverkill;
 import blume_system.chat.usercommands.CommandRanks;
 import blume_system.chat.usercommands.CommandStats;
 import blume_system.config.Level;
@@ -26,16 +32,6 @@ public class Config {
 	 * - Start items
 	 * - Help page
 	 * - Do not give a sword, give a stick... (make that ores can only be destoryed with a wooden pickaxe and animals can only be hit with a wooden stick, if not cancle event)
-	 *	give xp if kill
-	 *	make banner animation 
-	 *	sie sollen immer oben spawenn auch bei hölen
-	 *	sie sollen nicht in blöcken steckenbleiben
-	 *	disable kill message
-	 *	get location if red line they will die
-	 *	stop animal xp drop
-	 *  out of zone kill
-	 *  
-	 *  - enderdragon needs to be spawned at all directions, bottom, top left right...
 	 *
 	 */
 	
@@ -71,6 +67,36 @@ public class Config {
 	
 	
 	/*
+	 * villager settings
+	 */
+	public static String[] villager = {
+		ChatColor.YELLOW + "§lBuyer",
+		ChatColor.YELLOW + "§lSeller",
+		ChatColor.YELLOW + "§lBank",
+		ChatColor.YELLOW + "§lLevel"
+	};
+	
+	
+	/*
+	 * enable if villager spawnpoint will go in the middle of 4 blocks (0.5 buff)
+	 */
+	public static boolean villagerLocBuff = true;
+	
+	
+	/*
+	 * villagers config information
+	 * 
+	 * - getters and setters need to be addet to "ConfigSettings"
+	 */
+	public static String v = "villagers.";
+	public static String v1 = "buyerLoc";
+	public static String v2 = "sellerLoc";
+	public static String v3 = "bankLoc";
+	public static String v4 = "levelLoc";
+	
+	
+	
+	/*
 	 * command creation
 	 * 
 	 * - add in this class: command, class, description
@@ -83,7 +109,12 @@ public class Config {
 															"rankuptest",
 															"resetbody",
 															"ops",
-															"deops"
+															"deops",
+															"spawn_buyer",
+															"spawn_seller",
+															"spawn_bank",
+															"spawn_level",
+															"villageroverkill"
 	};
 
 	public static CommandExecutor userCommandClasses[] = {	new CommandRanks(),
@@ -92,7 +123,12 @@ public class Config {
 		  													new CommandRankuptest(),
 		  													new CommandResetbody(),
 		  													new CommandOps(),
-		  													new CommandDeops()
+		  													new CommandDeops(),
+		  													new CommandSpawn_buyer(),
+		  													new CommandSpawn_seller(),
+		  													new CommandSpawn_bank(),
+		  													new CommandSpawn_level(),
+		  													new CommandVillageroverkill()
 	};
 
 	public static String userCommandDesk[] = {				"List all user ranks",
@@ -101,7 +137,12 @@ public class Config {
 															"Test rankup sequenz",
 															"Rest all stats",
 															"Makes you op",
-															"Makes you deop"
+															"Makes you deop",
+															"Spawns a buyer villager",
+															"Spawns a seller villager",
+															"Spawns a bank villager",
+															"Spawns a level villager",
+															"Kill all vilagers"
 	};
 	
 	
@@ -164,6 +205,14 @@ public class Config {
 	
 	
 	/*
+	 * miner item name and type
+	 */
+	public static String minerItemName = ChatColor.WHITE + "§rOre";
+	public static Material minerItemType = Material.CLAY_BALL;
+	public static String minerRewardDesc = ChatColor.GRAY + "You can sell this item to earn money.";
+	
+	
+	/*
 	 * ranks for global xp
 	 * 
 	 *  - only use small letters
@@ -211,6 +260,12 @@ public class Config {
 	 */
 	public static int maxMoneyAmount = 1000000000;
 	public static int maxLevelAmount = 1000000000;
+	
+	
+	/*
+	 * item reward from butcher, miner... job limit message
+	 */
+	public static String invFullMes = ChatTags.logBlume() + "Your inventory is full."; //not in use
 	
 	
 	/*
@@ -279,6 +334,13 @@ public class Config {
 	public static String aCowBanner = ChatColor.GREEN + "+8 " + ChatColor.WHITE + "lvl";
 	public static String aConfigNameCow = "cowAmount";
 	
+	
+	/*
+	 * butcher item reward names
+	 */
+	public static String aRewardItemName = ChatColor.WHITE + "§rMeat";
+	public static Material aRewardItem = Material.PORK;
+	public static String aRewardDesc = ChatColor.GRAY + "You can sell this item to earn money.";
 	
 	
 	

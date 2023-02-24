@@ -3,6 +3,7 @@ package blume_system.general;
 import org.bukkit.World;
 import org.bukkit.entity.EnderDragon;
 import org.bukkit.entity.Entity;
+import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
@@ -11,10 +12,15 @@ import org.bukkit.event.block.BlockExpEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.entity.CreatureSpawnEvent;
 import org.bukkit.event.entity.CreatureSpawnEvent.SpawnReason;
+import org.bukkit.event.entity.EntityDamageByEntityEvent;
+import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityExplodeEvent;
 import org.bukkit.event.entity.ItemSpawnEvent;
+import org.bukkit.event.inventory.InventoryOpenEvent;
+import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.event.player.PlayerDropItemEvent;
 
+import blume_system.settings.Config;
 import net.minecraft.server.v1_8_R1.EntityComplexPart;
 
 public class WorldProtection implements Listener {
@@ -92,11 +98,38 @@ public class WorldProtection implements Listener {
 	//STOP DRAGON BLOCK DAMAGE
 	@EventHandler(priority=EventPriority.MONITOR)
     public void stopDragonDamage(EntityExplodeEvent e) {
-    if(e instanceof EnderDragon)
-    	if (Switches.getStopWPDragonDamage() == false) {
-    		 e.setCancelled(true);
-    	} else {
-    		Switches.setStopWPDragonDamage(false); //reset
-    	}
-    }
+	    if (e instanceof EnderDragon) {
+	    	if (Switches.getStopWPDragonDamage() == false) {
+	    		 e.setCancelled(true);
+	    	} else {
+	    		Switches.setStopWPDragonDamage(false); //reset
+	    	}
+	    }
+	}
+	
+	//STOP ENTITY DAMAGE ON VILLAGERS (That got placed by an operator)
+	@EventHandler(priority=EventPriority.MONITOR)
+    public void stopVillagerDamage(EntityDamageByEntityEvent e) {
+	    if (Switches.getStopWPVillagerDamage() == false) {
+	    	for (int i = 0; i < Config.villager.length; i++) {
+	    		if (e.getEntity().getCustomName() != null) {
+	    			if (Config.villager[i].equals(e.getEntity().getCustomName())) {
+		    	    	if (!e.getDamager().isOp()) {
+		    	    		e.setCancelled(true);
+		    	    	}
+		    		}
+	    		}
+	    	}
+	    } else {
+	    	Switches.setStopWPVillagerDamage(false); //reset
+	    }
+	}
+	
+	//STOP VILLAGER SHOP WINDOW OPEN
+	@EventHandler(priority=EventPriority.MONITOR)
+	public void onVillagerShopOpen(InventoryOpenEvent e){
+	    if(e.getInventory().getType() == InventoryType.MERCHANT){
+	        e.setCancelled(true);
+	    }
+	}
 }

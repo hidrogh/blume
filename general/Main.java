@@ -16,6 +16,7 @@ import blume_system.config.PlayerScoreboard;
 import blume_system.mining.Mining;
 import blume_system.mining.MiningZoneSort;
 import blume_system.settings.Config;
+import blume_system.villagerinv.RightClickEvent;
 
 public class Main extends JavaPlugin {
 	
@@ -40,6 +41,8 @@ public class Main extends JavaPlugin {
     	setCommands(); //set commands
     	
     	ConfigSettings.addWorldSettings(); //add world settings inside the config
+    	
+    	ConfigSettings.createVillagerLoc(); //create villager loc rows if not contained
     }
     
     public void onDisable() {
@@ -84,6 +87,7 @@ public class Main extends JavaPlugin {
     	getServer().getPluginManager().registerEvents(new PlayerWrite(), this);
     	getServer().getPluginManager().registerEvents(new AnimalEvent(), this);
     	getServer().getPluginManager().registerEvents(new AnimalReward(), this);
+    	getServer().getPluginManager().registerEvents(new RightClickEvent(), this);
     }
     
     public void setClasses() {
