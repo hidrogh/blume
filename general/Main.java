@@ -3,7 +3,6 @@ package blume_system.general;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import blume_system.bossbar.BossBar;
 import blume_system.butcher.AnimalEvent;
 import blume_system.butcher.AnimalReward;
 import blume_system.butcher.AnimalZoneSort;
@@ -12,11 +11,14 @@ import blume_system.chat.JoinLeave;
 import blume_system.chat.PlayerWrite;
 import blume_system.config.ConfigSettings;
 import blume_system.config.DisconnectMessages;
-import blume_system.config.PlayerScoreboard;
 import blume_system.mining.Mining;
 import blume_system.mining.MiningZoneSort;
 import blume_system.settings.Config;
+import blume_system.villagerinv.BankInv;
+import blume_system.villagerinv.BuyerInv;
+import blume_system.villagerinv.LevelInv;
 import blume_system.villagerinv.RightClickEvent;
+import blume_system.villagerinv.SellerInv;
 
 public class Main extends JavaPlugin {
 	
@@ -88,6 +90,10 @@ public class Main extends JavaPlugin {
     	getServer().getPluginManager().registerEvents(new AnimalEvent(), this);
     	getServer().getPluginManager().registerEvents(new AnimalReward(), this);
     	getServer().getPluginManager().registerEvents(new RightClickEvent(), this);
+    	getServer().getPluginManager().registerEvents(new BankInv(), this);
+    	getServer().getPluginManager().registerEvents(new SellerInv(), this);
+    	getServer().getPluginManager().registerEvents(new LevelInv(), this);
+    	getServer().getPluginManager().registerEvents(new BuyerInv(), this);
     }
     
     public void setClasses() {

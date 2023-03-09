@@ -3,6 +3,7 @@ package blume_system.settings;
 import org.bukkit.Material;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.entity.EntityType;
+import org.bukkit.entity.HumanEntity;
 import org.bukkit.entity.Player;
 
 import blume_system.chat.ChatTags;
@@ -116,7 +117,6 @@ public class Config {
 															"spawn_level",
 															"villageroverkill"
 	};
-
 	public static CommandExecutor userCommandClasses[] = {	new CommandRanks(),
 		  													new CommandStats(),
 		  													new CommandMakemepro(),
@@ -130,7 +130,6 @@ public class Config {
 		  													new CommandSpawn_level(),
 		  													new CommandVillageroverkill()
 	};
-
 	public static String userCommandDesk[] = {				"List all user ranks",
 															"Your stats",
 															"Maxes all stats",
@@ -341,6 +340,15 @@ public class Config {
 	public static String aRewardItemName = ChatColor.WHITE + "§rMeat";
 	public static Material aRewardItem = Material.PORK;
 	public static String aRewardDesc = ChatColor.GRAY + "You can sell this item to earn money.";
+	
+	
+	/*
+	 * Seller item prices
+	 */
+	public static String messageNoMoney = ChatTags.logBlume() + "You have nothing to sell";
+	public static String sPriceMeat = "1";
+	public static String sPriceOre = "3";
+	
 	
 	
 	

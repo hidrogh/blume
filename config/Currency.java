@@ -32,8 +32,6 @@ public class Currency {
 		
 		Main.getPluginInstance().getConfig().set("players.uuid-" + p.getUniqueId().toString() + ".currency", Integer.toString(sum));
 		
-		System.out.print(Log.logEvent() + "currency added" + "[player: " + p.getName() + " got " + oldCurrency + " and now " + (Integer.parseInt(oldCurrency) + amount));
-	
 		Main.getPluginInstance().saveConfig(); //save config file
 		
 		PlayerScoreboard.refresh(p); //refresh scoreboard

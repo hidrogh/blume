@@ -9,11 +9,9 @@ public class Log {
 	public static String logInfo() {
 		return "[ INFO ] ";
 	}
-	
 	public static String logEvent() {
 		return "[ EVENT ] ";
 	}
-	
 	public static String logError() {
 		return "[ ERROR ] ";
 	}
