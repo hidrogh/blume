@@ -1,7 +1,7 @@
 # BLUME
 
 ## ⬤ Info:
-  1. Spigot 1.8
+  1. Paper 1.20.4
   2. Version 1.0
   
 ## ⬤ Achievements:
