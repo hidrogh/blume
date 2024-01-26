@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="blume:jar">
+    <output-path>$USER_HOME$/Documents/paper server/plugins</output-path>
+    <root id="archive" name="blume.jar">
+      <element id="module-output" name="blume.main" />
+    </root>
+  </artifact>
+</component>
