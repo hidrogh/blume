@@ -20,3 +20,4 @@
   - Warrior system
   - Tablist ranking system
   - Permissions system
+  - Update fully to 1.20.4
